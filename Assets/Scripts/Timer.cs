@@ -37,7 +37,8 @@ public class Timer : MonoBehaviour
     public string GetStopwatchTime()
     {
         // Will return a string of the current stopwatch time
-        return _stopwatch.ToString();
+        // Should produce "Current Time: 0.000"
+        return "Current Time: " + _stopwatch.ToString();
     }
 
 }
