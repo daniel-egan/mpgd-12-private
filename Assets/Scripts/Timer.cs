@@ -16,17 +16,17 @@ public class Timer : MonoBehaviour
         return _stopwatch.IsRunning;
     }
 
-    public bool TransitionStopwatch()
+    public void TransitionStopwatch()
     {
         switch (_stopwatch.IsRunning)
         {
             // 2 states: start, stop
             case true:
                 _stopwatch.Stop();
-                return true;
+                return;
             case false:
                 _stopwatch.Start();
-                return true;
+                return;
         }
     }
 
