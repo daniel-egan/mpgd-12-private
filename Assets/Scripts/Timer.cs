@@ -48,7 +48,6 @@ public class Timer : MonoBehaviour
     void Start()
     {
         _stopwatchText = GetComponent<TextMeshProUGUI>();
-        TransitionStopwatch();
     }
 
     private void Update()
