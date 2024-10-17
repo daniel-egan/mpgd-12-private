@@ -5,28 +5,31 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     public Transform targetObj;
+    private Rigidbody rb;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
 void Update()
-{
+    {
     Vector3 direction = (targetObj.position - transform.position).normalized;
     
     float distanceToMove = 3 * Time.deltaTime;
 
     RaycastHit hit;
-    if (Physics.Raycast(transform.position, direction, out hit, distanceToMove))
-    {
-        if (hit.collider.CompareTag("Platform"))
+        if (Physics.Raycast(transform.position, direction, out hit, distanceToMove))
         {
-            return;
+            if (hit.collider.CompareTag("Platform"))
+            {
+                return;
+            }
+            
         }
+    transform.position = Vector3.MoveTowards(this.transform.position, targetObj.position, distanceToMove);
     }
 
-    transform.position = Vector3.MoveTowards(this.transform.position, targetObj.position, distanceToMove);
-}
+
 
 
 }
