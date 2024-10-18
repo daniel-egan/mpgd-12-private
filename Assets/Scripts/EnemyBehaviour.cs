@@ -6,9 +6,12 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public Transform targetObj;
     private Rigidbody rb;
+    public float pushBackForce = 1000f;
+    private CharacterController characterController;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -29,7 +32,15 @@ public class NewBehaviourScript : MonoBehaviour
         transform.position = Vector3.MoveTowards(this.transform.position, targetObj.position, distanceToMove);
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Vector3 direction = (transform.position - collision.transform.position).normalized;
+            Vector3 velocity = direction * pushBackForce;
+            characterController.Move(velocity * Time.deltaTime);
+        }
+    }
 
 
 }

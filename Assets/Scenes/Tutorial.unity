@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce5c54011378c478c00a90a6584246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushBackForce: 1000
+  pushBackForce: 2
 --- !u!1 &233230391
 GameObject:
   m_ObjectHideFlags: 0
@@ -6517,6 +6517,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!143 &1904473312
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904473300}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1993675097
 GameObject:
   m_ObjectHideFlags: 0
@@ -7341,6 +7367,10 @@ PrefabInstance:
       propertyPath: targetObj
       value: 
       objectReference: {fileID: 159309243}
+    - target: {fileID: 3816826321326964167, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
+      propertyPath: pushBackForce
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7598239771117146736, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30.75
@@ -7388,6 +7418,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3525383299323941275, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1904473306}
+    - targetCorrespondingSourceObject: {fileID: 3525383299323941275, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904473312}
   m_SourcePrefab: {fileID: 100100000, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
