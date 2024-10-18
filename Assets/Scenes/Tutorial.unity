@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276774, g: 0.21589115, b: 0.2978246, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -925,25 +925,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
   m_PrefabInstance: {fileID: 1697102238}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &159309241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159309240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9130656a350d74f1b87e487bb1a380a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 249208020}
-  walkSpeed: 5.5
-  jumpPower: 15
-  gravity: 10
-  lookSpeed: 20
-  lookXLimit: 45
-  canMove: 1
 --- !u!143 &159309242
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1010,6 +991,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 1728133904}
   completionText: {fileID: 140210700}
+--- !u!114 &159309246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159309240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256b59736cdd848fe9d0622c9237ed27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 249208020}
+  xSensitivity: 90
+  ySensitivity: 90
+--- !u!114 &159309247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159309240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868580c28d31e4119be6f6186c99eaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  speed: 5
+  gravity: -9.8
+  jumpHeight: 3
+--- !u!114 &159309248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159309240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dfdf55a38584af3952228d72dc34c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &233230391
 GameObject:
   m_ObjectHideFlags: 0
@@ -5524,13 +5548,19 @@ PrefabInstance:
       addedObject: {fileID: 159309242}
     - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 159309241}
-    - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 159309244}
     - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 159309245}
+    - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159309248}
+    - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159309247}
+    - targetCorrespondingSourceObject: {fileID: 5992802978107285555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159309246}
   m_SourcePrefab: {fileID: 100100000, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
 --- !u!1 &1710670546
 GameObject:
