@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public float pushBackForce = 1000f;
+    public float pushBackForce = 4f;
     private CharacterController characterController;
 
     void Start()

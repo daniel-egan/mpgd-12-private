@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce5c54011378c478c00a90a6584246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushBackForce: 2
+  pushBackForce: 30
 --- !u!1 &233230391
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,7 +7369,7 @@ PrefabInstance:
       objectReference: {fileID: 159309243}
     - target: {fileID: 3816826321326964167, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       propertyPath: pushBackForce
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7598239771117146736, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       propertyPath: m_LocalPosition.x
