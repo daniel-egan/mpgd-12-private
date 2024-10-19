@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce5c54011378c478c00a90a6584246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushBackForce: 30
+  pushBackForce: 10
 --- !u!1 &233230391
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,7 +7369,7 @@ PrefabInstance:
       objectReference: {fileID: 159309243}
     - target: {fileID: 3816826321326964167, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       propertyPath: pushBackForce
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7598239771117146736, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7411,6 +7411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8256382658193715512, guid: f5be70ffaccd9aa409da96bb9fed89e9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cee89130dad5e0e40a2b99bdbf0bafe5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

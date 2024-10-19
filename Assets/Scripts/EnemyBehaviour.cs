@@ -6,7 +6,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public Transform targetObj;
     private Rigidbody rb;
-    public float pushBackForce = 5f;
+    public float pushBackForce = 4f;
     private CharacterController characterController;
     void Start()
     {

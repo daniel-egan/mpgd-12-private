@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public float pushBackForce = 4f;
+    public float pushBackForce = 200f;
     private CharacterController characterController;
 
     void Start()
@@ -17,7 +17,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Vector3 direction = (transform.position - collision.transform.position).normalized;
             Vector3 velocity = direction * pushBackForce;
-            characterController.Move(velocity * Time.deltaTime);
+            characterController.Move(velocity * (Time.deltaTime*20));
         }
     }
 }
