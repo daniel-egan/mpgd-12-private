@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public float pushBackForce = 5f;
+    public float pushBackForce = 2f;
     private CharacterController characterController;
 
     public TextMeshProUGUI hitCount;
