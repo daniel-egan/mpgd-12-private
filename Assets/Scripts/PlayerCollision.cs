@@ -6,10 +6,10 @@ using TMPro;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public float pushBackForce = 200f;
+    public float pushBackForce = 5f;
     private CharacterController characterController;
 
-    public TextMeshProUGUI Hitcount;
+    public TextMeshProUGUI hitCount;
     private int count;
 
     void Start()
@@ -38,7 +38,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void UpdateHitText()
     {
-        Hitcount.text = "Hitcount : " + count.ToString();
+        hitCount.text = "Hitcount : " + count.ToString();
     }
 }
 

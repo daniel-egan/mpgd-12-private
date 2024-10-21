@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //tell playermotor to move using value from movement action
         motor.ProcessMove(ActionMapMain.Movement.ReadValue<Vector2>());
