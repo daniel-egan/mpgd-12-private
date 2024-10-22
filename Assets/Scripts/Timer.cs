@@ -47,6 +47,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
+        // This gets the UI text that corresponds to the "Current Time"
         _stopwatchText = GetComponent<TextMeshProUGUI>();
     }
 

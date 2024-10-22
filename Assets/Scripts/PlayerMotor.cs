@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this script handles our player moving around with the WASD keys
 public class PlayerMotor : MonoBehaviour
 {
+    //values for speed, isGrounded, speed, gravity & jumpheight
     private CharacterController controller;
     private Vector3 playerVelocity;
     public bool isGrounded;
@@ -28,20 +30,25 @@ public class PlayerMotor : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
+        //translate WASD key input to a vector3 input that can be applied to character controller
         moveDirection.x = input.x;
         moveDirection.z = input.y;
+        //calculate the force that needs to act on the player using the vector3 input, speed & time
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
+        //apply a steady force of gravity on the player when they're not midair/jumping
         playerVelocity.y += gravity * Time.deltaTime;
         if(isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
         }
+        //otherwise make the player fall
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
     public void Jump()
     {
+        //only let the player jump if they're on the ground/a platform
         if (isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
