@@ -1,3 +1,5 @@
+//This script was made using this tutorial: https://youtu.be/rJqP5EesxLk?si=CMstgPC0u9ets30Y
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
