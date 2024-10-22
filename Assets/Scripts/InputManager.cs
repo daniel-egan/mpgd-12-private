@@ -1,3 +1,5 @@
+//This script was made using this tutorial: https://youtu.be/rJqP5EesxLk?si=CMstgPC0u9ets30Y
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +7,11 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    //this script acts as a manager for the input system of  the game
     private PlayerInput playerInput;
     private PlayerInput.ActionMapMainActions ActionMapMain;
 
+    //there are separate scripts/objects for looking and moving
     private PlayerMotor motor;
     private PlayerLook look;
 
@@ -32,10 +36,12 @@ public class InputManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        //tell playerlook to look using value from look action
         look.ProcessLook(ActionMapMain.Look.ReadValue<Vector2>());
 
     }
 
+    //methods to turn on/off our action map
     private void OnEnable()
     {
         ActionMapMain.Enable();

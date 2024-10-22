@@ -1,9 +1,12 @@
+//This script was made using this tutorial: https://youtu.be/rJqP5EesxLk?si=CMstgPC0u9ets30Y
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+    //values for our camera, X and Y rotations/look on mouse
     public Camera cam;
     private float xRotation = 0f;
 
