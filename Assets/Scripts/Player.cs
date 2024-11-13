@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
             {
                 // Stops the timer
                 timer.TransitionStopwatch();
+                
+                // Set the PlayerPrefs so that we can access this string later in the next scene
+                PlayerPrefs.SetString("LevelCompletionTime", timer.GetStopwatchTime());
+                PlayerPrefs.SetString("LevelCompletionName", SceneManager.GetActiveScene().name);
+                PlayerPrefs.Save();
+                
                 // Shows the level completed text
                 completionText.gameObject.SetActive(true);
                 SceneManager.LoadScene("Completion");
