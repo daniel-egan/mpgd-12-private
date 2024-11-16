@@ -26,27 +26,44 @@ public class LevelCompletionTime : MonoBehaviour
         float[] times = GetTop3Times(levelCompletionName);
         
         // Compare the top 3 to see if completion time was quicker
-        CompareandUpdateTop3Times(times, levelCompletionTime);
+        float[] updatedTimes = CompareAndUpdateTop3Times(times, levelCompletionTime);
+
+        SaveTop3Times(updatedTimes);
     }
 
-    private void CompareandUpdateTop3Times(float[] times, float levelCompletionTime)
+    private void SaveTop3Times(float[] updatedTimes)
     {
+        throw new NotImplementedException();
+    }
+
+    private float[] CompareAndUpdateTop3Times(float[] times, float levelCompletionTime)
+    {
+        float[] newArray = new float[times.Length];
+        bool valueChange = false;
+        
         for (var i = 0; i < 3; i++)
         {
-            if (times[i] == 0)
-            {
-                // Then we know that the player has not completed the level at this index
-                // And then we can just insert at this current index
-            }
-            
             // Check if the levelCompletionTime is quicker than the time at the current index
-            if (times[i] > levelCompletionTime)
+            // Or if there is no completion time (0) at this current index
+            if (times[i] == 0 || times[i] > levelCompletionTime)
             {
-                
+                // And then we can just insert at this current index and copy 
+                Console.WriteLine($"Index {i}");
+                Console.WriteLine($"Replacing {times[i]}");
+                times[i] = levelCompletionTime;
+				
+				
+                Array.Copy(times, 0, newArray, 0, i);
+                Array.Copy(times, i, newArray, i + 1, 3-i-1);
+				
+                valueChange = true;
+                break;
             }
-            
             // Otherwise it has been completed and is slower than the current time so we move on
         }
+
+        // If no times are slower than we just return the original array
+        return valueChange == false ? times : newArray;
     }
 
     private float[] GetTop3Times(string levelCompletionName)
