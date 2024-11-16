@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
                 timer.TransitionStopwatch();
 
                 // Set the PlayerPrefs so that we can access this string later in the next scene
-                PlayerPrefs.SetString("LevelCompletionTime", timer.GetStopwatchTime());
+                PlayerPrefs.SetFloat("LevelCompletionTime", timer.GetStopwatchTime());
                 PlayerPrefs.SetString("LevelCompletionName", SceneManager.GetActiveScene().name);
                 PlayerPrefs.Save();
 
