@@ -14,5 +14,23 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Completion.unity
     guid: 77f4b2a7a3b01ec49b35782587754140
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: bdc1bbdf41d14f84ab452d0e5da37932
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: f328d2a57e252554b99915f1fe4cb706
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: ad6f3cf0aa1e2ac45ac6f35904c83df1
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: cf91a87e27a48484d98d336e39821022
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: ab98cb86359aaf34399bc185aff5cf7b
+  - enabled: 1
+    path: Assets/Scenes/Achievements.unity
+    guid: 44c43da03022b124f9e9640025beab71
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
