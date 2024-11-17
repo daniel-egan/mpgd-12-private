@@ -13,6 +13,7 @@ public class FriendlyNPCMovement : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            npcAnimator.speed = 1f;
             npcAnimator.SetBool("startAnimation", true);
         }
     }
@@ -21,7 +22,7 @@ public class FriendlyNPCMovement : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            npcAnimator.SetBool("startAnimation", false);
+            npcAnimator.speed = 0f;
         }
     }
 }
