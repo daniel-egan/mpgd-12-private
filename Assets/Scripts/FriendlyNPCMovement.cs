@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
-// used thehttps://www.youtube.com/watch?v=JS4k_lwmZHk
 public class FriendlyNPCMovement : MonoBehaviour
 {
     [SerializeField] private Animator npcAnimator;
-    
+    public TextMeshProUGUI Objectives;
+    void Start()
+    {
+        FindObjectives();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +20,8 @@ public class FriendlyNPCMovement : MonoBehaviour
         {
             npcAnimator.speed = 1f;
             npcAnimator.SetBool("startAnimation", true);
+            FollowObjectives();
+
         }
     }
 
@@ -25,4 +32,15 @@ public class FriendlyNPCMovement : MonoBehaviour
             npcAnimator.speed = 0f;
         }
     }
+    private void FindObjectives()
+    {
+        Objectives.text = "Locate your crab friend";
+    }
+
+    private void FollowObjectives()
+    {
+        Objectives.text = "Follow your friend to locate the key";
+    }
+
+
 }
