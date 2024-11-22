@@ -14,17 +14,17 @@ public class LevelCompletionTime : MonoBehaviour
         // Get the most recent time
         var levelCompletionTime = PlayerPrefs.GetFloat("LevelCompletionTime");
         print(levelCompletionTime);
-        
+
         // Get the most recent level completed
         var levelCompletionName = PlayerPrefs.GetString("LevelCompletionName");
         print(levelCompletionName);
-     
+
         TextMeshProUGUI timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
         timeText.text = $"{levelCompletionName} completed in {levelCompletionTime}";
 
         // Get the 3 best times for the level
         float[] times = GetTop3Times(levelCompletionName);
-        
+
         // Compare the top 3 to see if completion time was quicker
         float[] updatedTimes = CompareAndUpdateTop3Times(times, levelCompletionTime);
 
@@ -41,7 +41,7 @@ public class LevelCompletionTime : MonoBehaviour
     {
         float[] newArray = new float[times.Length];
         bool valueChange = false;
-        
+
         for (var i = 0; i < 3; i++)
         {
             // Check if the levelCompletionTime is quicker than the time at the current index
@@ -51,12 +51,12 @@ public class LevelCompletionTime : MonoBehaviour
                 // And then we can just insert at this current index and copy 
                 print($"Index {i}");
                 print($"Replacing {times[i]}");
-				
+
                 Array.Copy(times, 0, newArray, 0, i);
                 newArray[i] = levelCompletionTime;
-                
-                Array.Copy(times, i, newArray, i + 1, 3-i-1);
-				
+
+                Array.Copy(times, i, newArray, i + 1, 3 - i - 1);
+
                 valueChange = true;
                 break;
             }
