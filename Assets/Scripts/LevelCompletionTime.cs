@@ -48,12 +48,12 @@ public class LevelCompletionTime : MonoBehaviour
             if (times[i] == 0 || times[i] > levelCompletionTime)
             {
                 // And then we can just insert at this current index and copy 
-                Console.WriteLine($"Index {i}");
-                Console.WriteLine($"Replacing {times[i]}");
-                times[i] = levelCompletionTime;
-				
+                print($"Index {i}");
+                print($"Replacing {times[i]}");
 				
                 Array.Copy(times, 0, newArray, 0, i);
+                newArray[i] = levelCompletionTime;
+                
                 Array.Copy(times, i, newArray, i + 1, 3-i-1);
 				
                 valueChange = true;
