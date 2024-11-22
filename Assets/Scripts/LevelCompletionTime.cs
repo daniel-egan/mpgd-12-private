@@ -28,12 +28,13 @@ public class LevelCompletionTime : MonoBehaviour
         // Compare the top 3 to see if completion time was quicker
         float[] updatedTimes = CompareAndUpdateTop3Times(times, levelCompletionTime);
 
-        SaveTop3Times(updatedTimes);
+        print($"TIMES {string.Join(", ", updatedTimes)}");
+        SaveTop3Times(updatedTimes, levelCompletionName);
     }
 
-    private void SaveTop3Times(float[] updatedTimes)
+    private void SaveTop3Times(float[] updatedTimes, string levelCompletionName)
     {
-        throw new NotImplementedException();
+        PlayerPrefs.SetString($"{levelCompletionName}_TIMES", string.Join(",", updatedTimes));
     }
 
     private float[] CompareAndUpdateTop3Times(float[] times, float levelCompletionTime)
