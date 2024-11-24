@@ -15,14 +15,11 @@ public class Collectable : MonoBehaviour
         PlayerPrefs.Save();
         gameObject.SetActive(false);
     }
-    
+
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name != "Player")
-        {
-            return;
-        }
-        
+        if (other.gameObject.name != "Player") return;
+
         UnlockCollectable();
     }
 }
