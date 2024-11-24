@@ -38,11 +38,11 @@ public class Timer : MonoBehaviour
         return true;
     }
 
-    public string GetStopwatchTime()
+    public float GetStopwatchTime()
     {
         // Will return a string of the current stopwatch time
-        // Should produce "Current Time: 0.000"
-        return String.Format("Current Time: {0:00}s {1:000}ms", _stopwatch.Elapsed.TotalSeconds, _stopwatch.Elapsed.Milliseconds);
+        // Should produce "123.123"
+        return float.Parse($"{_stopwatch.Elapsed.TotalSeconds:00}.{_stopwatch.Elapsed.Milliseconds:000}");
     }
 
     void Start()
@@ -53,6 +53,6 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        _stopwatchText.text = GetStopwatchTime();
+        _stopwatchText.text = GetStopwatchTime().ToString();
     }
 }
