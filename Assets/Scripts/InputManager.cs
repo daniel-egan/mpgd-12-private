@@ -15,6 +15,9 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
+    public Transform resetPoint;
+    public Transform checkPoint;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,6 +28,7 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
 
         ActionMapMain.Jump.performed += ctx => motor.Jump();
+        ActionMapMain.Reset.performed += ctx => motor.Reset(resetPoint, checkPoint);
     }
 
     // Update is called once per frame
