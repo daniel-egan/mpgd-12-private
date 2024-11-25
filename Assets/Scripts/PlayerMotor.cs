@@ -35,7 +35,9 @@ public class PlayerMotor : MonoBehaviour
         //translate WASD key input to a vector3 input that can be applied to character controller
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        //calculate the force that needs to act on the player using the vector3 input, speed & time
+
+
+        //calculate the force that needs to act on the player using the vector3 input, speed & time, given that they're not wallrunning
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
         //apply a steady force of gravity on the player when they're not midair/jumping
@@ -44,16 +46,30 @@ public class PlayerMotor : MonoBehaviour
         {
             playerVelocity.y = -2f;
         }
-        //otherwise make the player fall
+        //otherwise make the player fall, if they're not wallrunning
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
     public void Jump()
     {
-        //only let the player jump if they're on the ground/a platform
         if (isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
+    }
+
+
+    public void Reset(Transform resetPosition, Transform checkPoint)
+    {
+        controller.enabled = false;
+        if (gameObject.GetComponent<Player>().hasKey == true)
+        {
+            controller.transform.position = checkPoint.position;
+        }
+        else
+        {
+            controller.transform.position = resetPosition.position;
+        }
+        controller.enabled = true;
     }
 }
