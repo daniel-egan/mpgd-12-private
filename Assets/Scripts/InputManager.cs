@@ -36,6 +36,7 @@ public class InputManager : MonoBehaviour
     {
         //tell playermotor to move using value from movement action
         motor.ProcessMove(ActionMapMain.Movement.ReadValue<Vector2>());
+        UpdateWallRun();
     }
 
     private void LateUpdate()
@@ -54,5 +55,27 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         ActionMapMain.Disable();
+    }
+
+    public void UpdateWallRun()
+    {
+        Debug.Log($"motor.isWallRunning: {motor.isWallRunning}");
+        if (motor.isWallRunning)
+        {
+            Debug.Log($"motor.wallNormal: {motor.wallNormal}");
+            Debug.Log($"look.wallRunTiltAngle: {look.wallRunTiltAngle}");
+            if (motor.wallNormal == Vector3.right)
+            {
+                look.SetCameraTilt(look.wallRunTiltAngle);
+            }
+            else if(motor.wallNormal == Vector3.left)
+            {
+                look.SetCameraTilt(-look.wallRunTiltAngle);
+            }
+        }
+        else
+        {
+            look.SetCameraTilt(0f);
+        }
     }
 }
