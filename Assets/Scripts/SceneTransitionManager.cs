@@ -9,9 +9,4 @@ public class SceneTransitionManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    // Optional: Function to quit the game
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
