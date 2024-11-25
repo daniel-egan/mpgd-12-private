@@ -1230,6 +1230,11 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!20 &723989948 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 620786689015028422, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+  m_PrefabInstance: {fileID: 1898803565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &732095814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3179,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4417700722724309555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417700722724309555, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.86
+      objectReference: {fileID: 0}
     - target: {fileID: 5582698963073936688, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -3381,7 +3394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256b59736cdd848fe9d0622c9237ed27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 723989948}
   xSensitivity: 90
   ySensitivity: 90
 --- !u!114 &1898803571
