@@ -6,7 +6,6 @@ public class NPCSpawner : MonoBehaviour
     public Vector2 spawnAreaSize = new Vector2(10, 10); // Size of the spawn area
     public int numberOfNPCs = 5; // Number of NPCs to spawn
     public Transform spawnAreaCenter; // Center of the spawn area
-    public float spawnCheckRadius = 0.5f; // Radius to check for collisions
 
     void Start()
     {
@@ -27,11 +26,8 @@ public class NPCSpawner : MonoBehaviour
         Vector3 randomPosition;
 
         // Retry until a valid position is found
-        do
-        {
-            randomPosition = GetRandomPosition();
-        }
-        while (IsPositionOccupied(randomPosition));
+        randomPosition = GetRandomPosition();
+       
 
         return randomPosition;
     }
@@ -44,12 +40,5 @@ public class NPCSpawner : MonoBehaviour
 
         // Return the position relative to the spawn area center
         return new Vector3(randomX, 0, randomZ) + spawnAreaCenter.position;
-    }
-
-    bool IsPositionOccupied(Vector3 position)
-    {
-        // Check for overlapping objects within the specified radius
-        Collider[] colliders = Physics.OverlapSphere(position, spawnCheckRadius);
-        return colliders.Length > 0;
     }
 }
