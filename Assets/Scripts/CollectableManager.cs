@@ -51,8 +51,8 @@ public class CollectableManager : MonoBehaviour
         else
         {
             print("LOADING FROM PLAYERPREFS");
-            List<CollectableItem> jsonStored = JsonUtility.FromJson<List<CollectableItem>>(savedPlayerPrefs);
-            return jsonStored;
+            CollectableItemList jsonStored = JsonUtility.FromJson<CollectableItemList>(savedPlayerPrefs);
+            return jsonStored.collectables;
         }
 
     }
@@ -74,7 +74,7 @@ public class CollectableManager : MonoBehaviour
 
     }
 
-    private CollectableItem findItemById(string id)
+    private CollectableItem FindItemById(string id)
     {
         CollectableItem element = CollectableItems.Find(element => element.id == id);
         return element;
@@ -82,14 +82,15 @@ public class CollectableManager : MonoBehaviour
 
     public void UnlockCollectable(string id)
     {
-        var collectable = findItemById(id);
+        var collectable = FindItemById(id);
         collectable.isUnlocked = true;
         SavePlayerPrefs();
     }
 
     private void SavePlayerPrefs()
     {
-        var json = JsonUtility.ToJson(CollectableItems, true);
+        CollectableItemList itemList = new CollectableItemList{collectables = CollectableItems};
+        var json = JsonUtility.ToJson(itemList, true);
         PlayerPrefs.SetString("collectables", json);
         PlayerPrefs.Save();
     }
