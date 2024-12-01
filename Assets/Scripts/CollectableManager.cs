@@ -30,7 +30,7 @@ public class CollectableManager : MonoBehaviour
             return;
         }
 
-            Instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
 
         CollectableItems = GetCollectableItems();
@@ -43,7 +43,7 @@ public class CollectableManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(savedPlayerPrefs))
         {
-            print("LOADING FROM JSON"); 
+            print("LOADING FROM JSON");
             List<CollectableItem> jsonStored = LoadJsonFile();
             return jsonStored;
         }
