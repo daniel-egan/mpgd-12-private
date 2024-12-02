@@ -21,7 +21,7 @@ public class EnemyLookAtPlayer : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
 
         // Apply the offset of +90 degrees around the desired axis (e.g., Y-axis)
-        Quaternion offsetRotation = Quaternion.Euler(0, 90, 0);
+        Quaternion offsetRotation = Quaternion.Euler(0, 0, 0);
 
         // Combine the rotations
         transform.rotation = lookRotation * offsetRotation;
