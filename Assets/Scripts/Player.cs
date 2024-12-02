@@ -42,6 +42,10 @@ public class Player : MonoBehaviour
                 // Shows the level completed text
                 completionText.gameObject.SetActive(true);
                 SceneManager.LoadScene("Completion");
+
+                // Unlock the cursor and make it visible
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
