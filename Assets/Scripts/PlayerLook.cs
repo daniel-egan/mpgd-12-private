@@ -13,19 +13,33 @@ public class PlayerLook : MonoBehaviour
     public float xSensitivity = 90f;
     public float ySensitivity = 90f;
 
+    //values for camera tilt when wall running
+    public float wallRunTiltAngle = 15f;
+    public float tiltSpeed = 10f;
+    public float currentTilt = 0f;
+
     public void ProcessLook(Vector2 input)
     {
         float mouseX = input.x;
         float mouseY = input.y;
 
-        //calculate camera rotation for looking up and down
+        // Calculate camera rotation for looking up and down
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
-        //apply this to our camera transform
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        // Combine xRotation for looking up/down with current tilt
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, currentTilt);
 
-        //rotate player to look left and right
+        // Rotate player to look left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
+
+    public void SetCameraTilt(float targetTilt)
+    {
+        currentTilt = Mathf.Lerp(currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
+
+        // Update local rotation to include tilt
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, currentTilt);
+    }
+
 }
