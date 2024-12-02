@@ -19,6 +19,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.gameObject.name != "Player") return;
 
+        // Will call into the CollectableManager singleton and unlock the collectable
         CollectableManager.Instance.UnlockCollectable(id);
         gameObject.SetActive(false);
     }
