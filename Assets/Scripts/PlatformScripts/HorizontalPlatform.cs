@@ -2,15 +2,28 @@ using UnityEngine;
 
 public class HorizontalPlatform : MonoBehaviour
 {
+    public enum StartDirection { Left, Right }
+
     public float speed = 3f; // Speed of the platform
     public float distance = 5f; // Distance to move horizontally
+    public StartDirection startDirection = StartDirection.Right; // Initial direction (from the Inspector)
 
     private Vector3 startPos; // Starting position
-    private bool movingRight = true; // Direction of movement
+    private bool movingRight; // Direction of movement
 
     void Start()
     {
         startPos = transform.position; // Record the initial position
+
+        // Set the initial direction based on the Inspector value
+        if (startDirection == StartDirection.Right)
+        {
+            movingRight = true;
+        }
+        else
+        {
+            movingRight = false;
+        }
     }
 
     void Update()
@@ -26,5 +39,21 @@ public class HorizontalPlatform : MonoBehaviour
         {
             movingRight = !movingRight;
         }
+    }
+
+    // Public method to change direction dynamically from other scripts (optional)
+    public void StartMovingRight()
+    {
+        movingRight = true;
+    }
+
+    public void StartMovingLeft()
+    {
+        movingRight = false;
+    }
+
+    public void ToggleDirection()
+    {
+        movingRight = !movingRight;
     }
 }
