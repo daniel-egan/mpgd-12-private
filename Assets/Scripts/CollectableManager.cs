@@ -43,7 +43,6 @@ public class CollectableManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         CollectableItems = GetCollectableItems();
-        print(CollectableItems.Count);
     }
 
     private List<CollectableItem> GetCollectableItems()
