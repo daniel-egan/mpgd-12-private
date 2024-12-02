@@ -34,7 +34,7 @@ public class FriendlyNPCMovement : MonoBehaviour
     }
     private void FindObjectives()
     {
-        Objectives.text = "Locate your crab friend";
+        Objectives.text = "Locate your crab friend near their house";
     }
 
     private void FollowObjectives()

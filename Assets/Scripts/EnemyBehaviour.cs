@@ -9,6 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     public float pushBackForce = 400f;
     private CharacterController characterController;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +24,7 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 direction = (targetObj.position - transform.position).normalized;
         float distanceToMove = 1 * Time.deltaTime;
         transform.position = Vector3.MoveTowards(this.transform.position, targetObj.position, distanceToMove);
+    
     }
 
     // Collision detection used https://docs.unity3d.com/ScriptReference/Collider.OnCollisionEnter.html 
