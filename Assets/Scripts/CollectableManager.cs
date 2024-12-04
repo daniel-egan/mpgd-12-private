@@ -82,7 +82,7 @@ public class CollectableManager : MonoBehaviour
             return jsonStored.collectables;
         }
         // If something goes wrong with the loading of the JSON, then print out the error message
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Debug.LogError($"Error parsing achievements.json: {e.Message}");
             return new List<CollectableItem>();
