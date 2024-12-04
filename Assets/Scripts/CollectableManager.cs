@@ -100,9 +100,25 @@ public class CollectableManager : MonoBehaviour
     public void UnlockCollectable(string id)
     {
         var collectable = FindItemById(id);
-        // Change the field of the collectable to be unlocked being true
-        collectable.isUnlocked = true;
-        SavePlayerPrefs();
+
+        if (collectable == null)
+        {
+            print($"NO COLLECTABLE WITH ID: {id}");
+        }
+        else{    
+            if (collectable.isUnlocked)
+            {
+                print("ALREADY UNLOCKED");
+                return;
+            }
+        
+            // Change the field of the collectable to be unlocked being true
+            collectable.isUnlocked = true;
+            SavePlayerPrefs();
+            
+        }
+        
+
     }
 
     private void SavePlayerPrefs()
