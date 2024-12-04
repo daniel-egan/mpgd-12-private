@@ -6,12 +6,7 @@ public class NPCBehavior : MonoBehaviour
 {
     public Animator npcAnimator;
     public GameObject player;
-    public float rotationSpeed = 200f;
-
-    void Start()
-    {
-
-    }
+    public float rotationSpeed = 5f;
 
     void OnTriggerEnter(Collider other)
     {
@@ -36,5 +31,7 @@ public class NPCBehavior : MonoBehaviour
             npcAnimator.SetTrigger("Swim");
         }
     }
+
+ 
 }
 
