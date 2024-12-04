@@ -3795,9 +3795,6 @@ PrefabInstance:
       addedObject: {fileID: 8648425311235903399}
     - targetCorrespondingSourceObject: {fileID: 7511180232019162148, guid: 818c5a1ba0d9810439f11299463f2294, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8648425311235903401}
-    - targetCorrespondingSourceObject: {fileID: 7511180232019162148, guid: 818c5a1ba0d9810439f11299463f2294, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8648425311235903403}
     - targetCorrespondingSourceObject: {fileID: 7511180232019162148, guid: 818c5a1ba0d9810439f11299463f2294, type: 3}
       insertIndex: -1
@@ -4191,21 +4188,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8648425311235903401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7511180233858824119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38db5c1c7ecff9439da85e748e681b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcAnimator: {fileID: 8033698545106086965}
-  player: {fileID: 1846327915}
-  rotationSpeed: 5
 --- !u!195 &8648425311235903403
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4240,13 +4222,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b159928b52b707640b75353e0b324bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAnimator: {fileID: 8033698545106086965}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192
-  playerPlayer:
+  playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  range: 15
+  range: 45
+  sightRange: 30
+  attackRange: 15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

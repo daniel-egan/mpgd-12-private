@@ -18,8 +18,7 @@ public class NPCBehavior : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
-
-            // Trigger the Attack animation
+;
             npcAnimator.SetTrigger("Attack");
         }
     }
