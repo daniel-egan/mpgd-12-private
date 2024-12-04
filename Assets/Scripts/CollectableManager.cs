@@ -105,26 +105,27 @@ public class CollectableManager : MonoBehaviour
         {
             print($"NO COLLECTABLE WITH ID: {id}");
         }
-        else{    
+        else
+        {
             if (collectable.isUnlocked)
             {
                 print("ALREADY UNLOCKED");
                 return;
             }
-        
+
             // Change the field of the collectable to be unlocked being true
             collectable.isUnlocked = true;
             SavePlayerPrefs();
-            
+
         }
-        
+
 
     }
 
     private void SavePlayerPrefs()
     {
         // Create a new wrapper object which has all the collectables as a field
-        CollectableItemList itemList = new CollectableItemList{collectables = CollectableItems};
+        CollectableItemList itemList = new CollectableItemList { collectables = CollectableItems };
         // Convert the wrapper into a JSON string
         var json = JsonUtility.ToJson(itemList, true);
         // Save to the PlayerPrefs
