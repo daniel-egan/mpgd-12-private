@@ -10,32 +10,41 @@ public class EnemyAiming : MonoBehaviour
     public float fireRate = 1f;
     private float nextFireTime;
 
+    // Only shoot if the player is within attack range
+    public float attackRange = 10f;
+
     void Update()
     {
         if (player != null)
         {
+            // Calculate the direction to the player
             Vector2 direction = player.position - firePoint.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             firePoint.rotation = Quaternion.Euler(0, 0, angle);
 
-            if (Time.time > nextFireTime)
+            // Only shoot if the player is within attack range
+            if (Vector3.Distance(player.position, firePoint.position) <= attackRange)
             {
-                Shoot();
-                nextFireTime = Time.time + fireRate;
+                if (Time.time > nextFireTime)
+                {
+                    Shoot();
+                    nextFireTime = Time.time + fireRate;
+                }
             }
+            
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         ProjectileBehavior projectileBehavior = projectile.GetComponent<ProjectileBehavior>();
 
         if (projectileBehavior != null && player != null)
         {
-            projectileBehavior.Initialize(player); // Pass the player's Transform as the target
+            projectileBehavior.Initialize(player);
         }
+        Destroy(projectile, 5f);
     }
-
 }
 

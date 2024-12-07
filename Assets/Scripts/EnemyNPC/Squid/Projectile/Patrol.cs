@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
+    private EnemyAiming AimAndShoot;
     public Animator npcAnimator;
     NavMeshAgent agent;
     GameObject player;
@@ -18,11 +19,15 @@ public class Patrol : MonoBehaviour
     [SerializeField] float sightRange, attackRange;
     bool playerInSight, playerInAttack;
 
+    // Custom swim behavior parameters
+    [SerializeField] float swimHeightRange = 40f; // Range for vertical movement (up/down)
+    [SerializeField] float swimSpeed = 10f; // Speed of vertical swimming
 
     void Start()
     {
-        agent = GetComponent < NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
+        AimAndShoot = GetComponent<EnemyAiming>();
     }
 
     void Update()
@@ -39,12 +44,18 @@ public class Patrol : MonoBehaviour
     {
         npcAnimator.SetTrigger("Swim");
         if (!walkpointSet) SearchForDest();
-        if(walkpointSet) agent.SetDestination(destPoint);
-        if(Vector3.Distance(transform.position, destPoint)<10) walkpointSet = false;
+        if (walkpointSet) agent.SetDestination(destPoint);
+
+        // Apply vertical movement to simulate swimming up/down
+        float yPosition = Mathf.PingPong(Time.time * swimSpeed, swimHeightRange) + transform.position.y;
+        transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
+
+        if (Vector3.Distance(transform.position, destPoint) < 10) walkpointSet = false;
     }
 
     void SearchForDest()
     {
+        // Randomize the destination within a specified range
         float z = Random.Range(-range, range);
         float x = Random.Range(-range, range);
         destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
@@ -58,10 +69,23 @@ public class Patrol : MonoBehaviour
     void Chase()
     {
         agent.SetDestination(player.transform.position);
+
+        // Optionally, you can add vertical chase logic if the fish needs to chase the player up/down
+        float yPosition = Mathf.PingPong(Time.time * swimSpeed, swimHeightRange) + transform.position.y;
+        transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
     }
 
     void Attack()
     {
         npcAnimator.SetTrigger("Attack");
+
+        if (AimAndShoot != null)
+        {
+            AimAndShoot.Shoot();
+        }
+        else
+        {
+            Debug.LogWarning("AimAndShoot script not found on the same GameObject!");
+        }
     }
 }
