@@ -1,0 +1,34 @@
+{
+  "collectables": [
+    {
+      "id": "achievement_001",
+      "name": "Lorem Ipsum",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "isUnlocked": false
+    },
+    {
+      "id": "achievement_002",
+      "name": "Dolor Sit Amet",
+      "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "isUnlocked": false
+    },
+    {
+      "id": "achievement_003",
+      "name": "Ut Enim",
+      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "isUnlocked": false
+    },
+    {
+      "id": "achievement_004",
+      "name": "Duis Aute",
+      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+      "isUnlocked": false
+    },
+    {
+      "id": "achievement_005",
+      "name": "Excepteur Sint",
+      "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.",
+      "isUnlocked": false
+    }
+  ]
+}
