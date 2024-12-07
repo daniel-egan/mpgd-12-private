@@ -35,7 +35,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(WaitAndDeactivateSplashScreen(2f));
+            StartCoroutine(WaitAndDeactivateSplashScreen(1f));
         }
     }
     private IEnumerator WaitAndDeactivateSplashScreen(float waitTime)

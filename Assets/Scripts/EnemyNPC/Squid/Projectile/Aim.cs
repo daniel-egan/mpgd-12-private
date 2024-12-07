@@ -44,7 +44,7 @@ public class EnemyAiming : MonoBehaviour
         {
             projectileBehavior.Initialize(player);
         }
-        Destroy(projectile, 5f);
+        Destroy(projectile, 2f);
     }
 }
 
