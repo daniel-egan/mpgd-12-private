@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0ae474b-c0ac-4c0b-8015-c8f0a6249b7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""WRDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1895ecc-14ea-44e7-a592-9801324383ed"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +226,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_actionMapMain_Reset = m_actionMapMain.FindAction("Reset", throwIfNotFound: true);
         m_actionMapMain_WRUp = m_actionMapMain.FindAction("WRUp", throwIfNotFound: true);
         m_actionMapMain_WRDown = m_actionMapMain.FindAction("WRDown", throwIfNotFound: true);
+        m_actionMapMain_Grapple = m_actionMapMain.FindAction("Grapple", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_actionMapMain_Reset;
     private readonly InputAction m_actionMapMain_WRUp;
     private readonly InputAction m_actionMapMain_WRDown;
+    private readonly InputAction m_actionMapMain_Grapple;
     public struct ActionMapMainActions
     {
         private @PlayerInput m_Wrapper;
@@ -283,6 +305,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Reset => m_Wrapper.m_actionMapMain_Reset;
         public InputAction @WRUp => m_Wrapper.m_actionMapMain_WRUp;
         public InputAction @WRDown => m_Wrapper.m_actionMapMain_WRDown;
+        public InputAction @Grapple => m_Wrapper.m_actionMapMain_Grapple;
         public InputActionMap Get() { return m_Wrapper.m_actionMapMain; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +333,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @WRDown.started += instance.OnWRDown;
             @WRDown.performed += instance.OnWRDown;
             @WRDown.canceled += instance.OnWRDown;
+            @Grapple.started += instance.OnGrapple;
+            @Grapple.performed += instance.OnGrapple;
+            @Grapple.canceled += instance.OnGrapple;
         }
 
         private void UnregisterCallbacks(IActionMapMainActions instance)
@@ -332,6 +358,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @WRDown.started -= instance.OnWRDown;
             @WRDown.performed -= instance.OnWRDown;
             @WRDown.canceled -= instance.OnWRDown;
+            @Grapple.started -= instance.OnGrapple;
+            @Grapple.performed -= instance.OnGrapple;
+            @Grapple.canceled -= instance.OnGrapple;
         }
 
         public void RemoveCallbacks(IActionMapMainActions instance)
@@ -357,5 +386,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnReset(InputAction.CallbackContext context);
         void OnWRUp(InputAction.CallbackContext context);
         void OnWRDown(InputAction.CallbackContext context);
+        void OnGrapple(InputAction.CallbackContext context);
     }
 }

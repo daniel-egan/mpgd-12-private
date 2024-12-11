@@ -40,6 +40,28 @@ public class PlayerMotor : MonoBehaviour
     private Coroutine dashCoroutine;
     public UnityEngine.UI.Slider dashCooldownBar;
     private float lastDashTime = 0f;
+    private bool forcedDashCooldownUI = false;
+    private bool isCooldownFull = false;
+
+    // variables for grappling
+    public float grappleSpeed = 20f; // Speed of the grapple pull
+    public float maxGrappleDistance = 20f; // Maximum range of the grapple
+    public LayerMask grappleLayer; // Layers the grapple can attach to
+    public LineRenderer grappleLine; // Line renderer to visualize the grapple
+    private bool isGrappling = false; // Whether the player is currently grappling
+    private Vector3 grapplePoint; // Point the grapple is attached to
+    private bool dashedBeforeGrapple = false;
+
+    //variables for super dash
+    public int instantCooldownCount = 0; // Counter for instant cooldowns
+    public UnityEngine.UI.Slider superDashCounterBar; // Slider to show progress toward super dash
+    public float superDashThreshold = 6; // Number of instant cooldowns needed for super dash
+    public float superDashSpeed = 100f;
+    private bool canSuperCount = false;
+    private bool isSuperDashing = false;
+    private float lastCountTime = 0f;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +76,42 @@ public class PlayerMotor : MonoBehaviour
         //Debug.Log(isTouchingWall);
         isGrounded = controller.isGrounded;
 
+        if (isGrounded)
+        {
+            dashedBeforeGrapple = false; //Reset flag when grounded
+            isGrappling = false; //Stop grappling when grounded
+            canSuperCount = false;
+
+            if (Time.time - lastCountTime >= 3f)
+            {
+                if (instantCooldownCount > 0)
+                {
+                    Debug.Log("RESET COOLDOWN COUNT");
+                    instantCooldownCount = 0;
+                    superDashCounterBar.value = 0;
+                }
+            }
+        }
+
         CheckForWall();
-        UpdateDashCooldownUI();
+
+        if (forcedDashCooldownUI)
+        {
+            UpdateDashCooldownUI(true);
+            forcedDashCooldownUI = false;
+        }
+        else
+        {
+            UpdateDashCooldownUI();
+        }
+
+        if (isCooldownFull)
+        {
+            if (isDashing)
+            {
+                isCooldownFull = false;
+            }
+        }
 
         //if (isTouchingWall && !isGrounded && playerVelocity.y <= 0)
         if (isTouchingWall && !isGrounded)
@@ -67,12 +123,26 @@ public class PlayerMotor : MonoBehaviour
             StopWallRun();
         }
 
-        if (isDashing)
+        if (isDashing || isSuperDashing)
         {
             lastDashTime = Time.time;
-            playerVelocity.x = 0;
-            playerVelocity.z = 0;
-            controller.Move(Camera.main.transform.forward * dashSpeed * Time.deltaTime);
+            //playerVelocity.x = 0;
+            //playerVelocity.z = 0;
+            if (isSuperDashing)
+            {
+                //Debug.Log("SUPER DASH");
+                controller.Move(Camera.main.transform.forward * superDashSpeed * Time.deltaTime);
+                //instantCooldownCount = 0;
+            }
+            else
+            {
+                controller.Move(Camera.main.transform.forward * dashSpeed * Time.deltaTime);
+            }
+        }
+
+        if (isGrappling)
+        {
+            PerformGrapple();
         }
 
         //Handle upwards and downwards wallrunning
@@ -115,7 +185,7 @@ public class PlayerMotor : MonoBehaviour
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
         //apply a steady force of gravity on the player when they're not midair/jumping
-        if (!isWallRunning)
+        if (!isWallRunning && !isDashing)
         {
             playerVelocity.y += gravity * Time.deltaTime;
             if (isGrounded && playerVelocity.y < 0)
@@ -153,11 +223,26 @@ public class PlayerMotor : MonoBehaviour
         }
         else if (canDash)
         {
-            if (dashCoroutine != null)
+            canSuperCount = true;
+
+            if (instantCooldownCount >= superDashThreshold)
             {
-                StopCoroutine(dashCoroutine);
+                instantCooldownCount = 0;
+                isSuperDashing = true;
+                if (dashCoroutine != null)
+                {
+                    StopCoroutine(dashCoroutine);
+                }
+                dashCoroutine = StartCoroutine(PerformSuperDash());
             }
-            dashCoroutine = StartCoroutine(PerformDash());
+            else
+            {
+                if (dashCoroutine != null)
+                {
+                    StopCoroutine(dashCoroutine);
+                }
+                dashCoroutine = StartCoroutine(PerformDash());
+            }
         }
     }
 
@@ -185,9 +270,8 @@ public class PlayerMotor : MonoBehaviour
         // Check if either wall is detected
         if (Physics.Raycast(transform.position, transform.right, out hitRight, wallCheckDistance, wallLayer))
         {
-            if(Vector3.Dot(transform.forward, hitRight.normal) < -0.1f)
+            if (Vector3.Dot(transform.forward, hitRight.normal) < -0.1f)
             {
-                Debug.Log("Touching Wall");
                 isTouchingWall = true;
                 wallNormal = hitRight.normal; // Get the normal of the wall on the right
             }
@@ -195,9 +279,8 @@ public class PlayerMotor : MonoBehaviour
         }
         else if (Physics.Raycast(transform.position, -transform.right, out hitLeft, wallCheckDistance, wallLayer))
         {
-            if(Vector3.Dot(transform.forward, hitLeft.normal) < -0.1f)
+            if (Vector3.Dot(transform.forward, hitLeft.normal) < -0.1f)
             {
-                Debug.Log("Touching Wall");
                 isTouchingWall = true;
                 wallNormal = hitLeft.normal; // Get the normal of the wall on the left
             }
@@ -217,7 +300,7 @@ public class PlayerMotor : MonoBehaviour
         isWallRunning = true;
 
         // Cancel gravity while wall running
-        if(!isHoldingWallRunUp && !isHoldingWallRunDown)
+        if (!isHoldingWallRunUp && !isHoldingWallRunDown)
         {
             playerVelocity.y = 0;
         }
@@ -282,23 +365,140 @@ public class PlayerMotor : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        dashedBeforeGrapple = true; // Set the flag when dashing starts
+
+        //lastDashTime = Time.time;
 
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
 
-        // Start cooldown
-        yield return new WaitForSeconds(dashCooldown);
-
-        canDash = true;
+        // Wait for the cooldown if it hasn't been reset by grappling
+        if (!isGrappling)
+        {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+            forcedDashCooldownUI = true;
+        }
     }
 
-    void UpdateDashCooldownUI()
+    private IEnumerator PerformSuperDash()
     {
-        // Calculate the cooldown progress (1 = ready, 0 = just used)
-        float cooldownProgress = Mathf.Clamp01((Time.time - lastDashTime) / dashCooldown);
+        canDash = false;
+        isSuperDashing = true;
 
-        // Update the slider's value
-        dashCooldownBar.value = cooldownProgress;
+        dashCooldownBar.value = 0f;
+        superDashCounterBar.value = 0f;
+        instantCooldownCount = 0;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        isSuperDashing = false;
+
+        if (!isGrappling)
+        {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+            forcedDashCooldownUI = true;
+        }
     }
+
+
+    void UpdateDashCooldownUI(bool forceUpdate = false)
+    {
+        float counterProgress;
+
+        if (forceUpdate)
+        {
+            // Instantly set slider to 1 (fully cooled down) and increment superDashCounter
+            dashCooldownBar.value = 1f;
+            isCooldownFull = true;
+
+            if (canSuperCount)
+            {
+                instantCooldownCount++;
+                lastCountTime = Time.time;
+            }
+
+            //show super dash counter progress
+            counterProgress = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
+            superDashCounterBar.value = counterProgress;
+
+            Canvas.ForceUpdateCanvases();
+            return;
+        }
+
+        if (isCooldownFull)
+        {
+            return;
+        }
+
+        //show dash progress
+        float cooldownProgress = Mathf.Clamp01((Time.time - lastDashTime) / dashCooldown);
+        dashCooldownBar.value = cooldownProgress;
+
+        //show super dash counter progress
+        counterProgress = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
+        superDashCounterBar.value = counterProgress;
+    }
+
+    public void StartGrapple()
+    {
+        if (isGrappling)
+        {
+            return;
+        }
+
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, maxGrappleDistance, grappleLayer))
+        {
+            grapplePoint = hit.point;
+
+            // Prevent grappling upwards
+            if (grapplePoint.y > transform.position.y) return;
+
+            isGrappling = true;
+
+            // Visualize the grapple
+            grappleLine.enabled = true;
+            grappleLine.SetPosition(0, transform.position);
+            grappleLine.SetPosition(1, grapplePoint);
+
+            // Reset the dash cooldown if dashed before grappling
+            if (dashedBeforeGrapple)
+            {
+                canDash = true; // Reset dash availability
+                dashedBeforeGrapple = false; // Reset the flag
+                forcedDashCooldownUI = true;
+            }
+        }
+    }
+
+
+
+    void PerformGrapple()
+    {
+        Vector3 direction = grapplePoint - transform.position;
+        float distance = direction.magnitude;
+
+        if (distance < 1f || isGrounded)
+        {
+            StopGrapple();
+            return;
+        }
+
+        controller.Move(direction.normalized * grappleSpeed * Time.deltaTime);
+
+        // Update the grapple visualization
+        grappleLine.SetPosition(0, transform.position);
+        grappleLine.SetPosition(1, grapplePoint);
+    }
+
+    void StopGrapple()
+    {
+        isGrappling = false;
+        grappleLine.enabled = false;
+        dashedBeforeGrapple = false; // Ensure flag is reset when grapple ends
+    }
+
 }

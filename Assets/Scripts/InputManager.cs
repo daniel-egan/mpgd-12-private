@@ -35,6 +35,8 @@ public class InputManager : MonoBehaviour
 
         ActionMapMain.WRDown.started += ctx => motor.isHoldingWallRunDown = true;
         ActionMapMain.WRDown.canceled += ctx => motor.isHoldingWallRunDown = false;
+
+        ActionMapMain.Grapple.performed += ctx => motor.StartGrapple();
     }
 
     // Update is called once per frame
