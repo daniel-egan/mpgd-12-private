@@ -29,6 +29,14 @@ public class InputManager : MonoBehaviour
 
         ActionMapMain.Jump.performed += ctx => motor.Jump();
         ActionMapMain.Reset.performed += ctx => motor.Reset(resetPoint, checkPoint);
+
+        ActionMapMain.WRUp.started += ctx => motor.isHoldingWallRunUp = true;
+        ActionMapMain.WRUp.canceled += ctx => motor.isHoldingWallRunUp = false;
+
+        ActionMapMain.WRDown.started += ctx => motor.isHoldingWallRunDown = true;
+        ActionMapMain.WRDown.canceled += ctx => motor.isHoldingWallRunDown = false;
+
+        ActionMapMain.Grapple.performed += ctx => motor.StartGrapple();
     }
 
     // Update is called once per frame
@@ -36,7 +44,6 @@ public class InputManager : MonoBehaviour
     {
         //tell playermotor to move using value from movement action
         motor.ProcessMove(ActionMapMain.Movement.ReadValue<Vector2>());
-        UpdateWallRun();
     }
 
     private void LateUpdate()
@@ -55,27 +62,5 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         ActionMapMain.Disable();
-    }
-
-    public void UpdateWallRun()
-    {
-        Debug.Log($"motor.isWallRunning: {motor.isWallRunning}");
-        if (motor.isWallRunning)
-        {
-            Debug.Log($"motor.wallNormal: {motor.wallNormal}");
-            Debug.Log($"look.wallRunTiltAngle: {look.wallRunTiltAngle}");
-            if (motor.wallNormal == Vector3.right)
-            {
-                look.SetCameraTilt(look.wallRunTiltAngle);
-            }
-            else if(motor.wallNormal == Vector3.left)
-            {
-                look.SetCameraTilt(-look.wallRunTiltAngle);
-            }
-        }
-        else
-        {
-            look.SetCameraTilt(0f);
-        }
     }
 }
