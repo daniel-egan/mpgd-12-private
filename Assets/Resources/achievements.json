@@ -1,33 +1,27 @@
 {
   "collectables": [
     {
-      "id": "achievement_001",
-      "name": "Lorem Ipsum",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "time_Tutorial",
+      "name": "Tutorial Speedster",
+      "description": "Complete the tutorial quicker than the developers at 90 seconds",
       "isUnlocked": false
     },
     {
-      "id": "achievement_002",
-      "name": "Dolor Sit Amet",
-      "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "id": "time_Level1",
+      "name": "Rookie Racer",
+      "description": "Complete level one quicker than the developers at 300 seconds",
       "isUnlocked": false
     },
     {
-      "id": "achievement_003",
-      "name": "Ut Enim",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "id": "time_Level2",
+      "name": "Time Virtuoso",
+      "description": "Complete level two quicker than the developers at 300 seconds",
       "isUnlocked": false
     },
     {
-      "id": "achievement_004",
-      "name": "Duis Aute",
-      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
-      "isUnlocked": false
-    },
-    {
-      "id": "achievement_005",
-      "name": "Excepteur Sint",
-      "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.",
+      "id": "time_Level3",
+      "name": "Speed Demon",
+      "description": "Complete level three quicker than the developers at 300 seconds",
       "isUnlocked": false
     }
   ]
