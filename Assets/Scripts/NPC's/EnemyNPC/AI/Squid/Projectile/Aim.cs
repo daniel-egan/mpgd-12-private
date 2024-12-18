@@ -1,3 +1,4 @@
+// The following section of code was aided with the use of ChatGPT
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,10 @@ public class EnemyAiming : MonoBehaviour
     public GameObject projectilePrefab;
     public float fireRate = 1f;
     private float nextFireTime;
+    public Canvas splashScreen;
 
-    // Only shoot if the player is within attack range
     public float attackRange = 10f;
+
 
     void Update()
     {
@@ -31,7 +33,7 @@ public class EnemyAiming : MonoBehaviour
                     nextFireTime = Time.time + fireRate;
                 }
             }
-            
+
         }
     }
 
@@ -45,6 +47,12 @@ public class EnemyAiming : MonoBehaviour
             projectileBehavior.Initialize(player);
         }
         Destroy(projectile, 2f);
+        StartCoroutine(DisableSplashScreenAfterDelay(2f));
+    }
+
+    private IEnumerator DisableSplashScreenAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        splashScreen.gameObject.SetActive(false);
     }
 }
-

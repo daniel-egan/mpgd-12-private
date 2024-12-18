@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // For accessing UI components
+using UnityEngine.UI;
 
 public class ProjectileBehavior : MonoBehaviour
 {
@@ -28,22 +28,15 @@ public class ProjectileBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             splashScreen.gameObject.SetActive(true);
+            StartCoroutine(DisableSplashScreenAfterTime(5f));
         }
     }
 
-    void OnTriggerExit(Collider other)
+    IEnumerator DisableSplashScreenAfterTime(float delay)
     {
-        if (other.CompareTag("Player"))
-        {
-            StartCoroutine(WaitAndDeactivateSplashScreen(1f));
-        }
-    }
-    private IEnumerator WaitAndDeactivateSplashScreen(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(delay);
         splashScreen.gameObject.SetActive(false);
     }
-
 }
 
 
