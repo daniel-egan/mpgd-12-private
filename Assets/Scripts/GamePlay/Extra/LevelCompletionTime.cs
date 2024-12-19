@@ -8,6 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelCompletionTime : MonoBehaviour
 {
+    private readonly Dictionary<string, float> _achievementTimes = new Dictionary<string, float>
+    {
+        {"Tutorial", 90f},
+        {"Level1", 300f},
+        {"Level2", 300f},
+        {"Level3", 300f},
+    };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +30,9 @@ public class LevelCompletionTime : MonoBehaviour
         TextMeshProUGUI timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
         timeText.text = $"{levelCompletionName} completed in {levelCompletionTime}";
 
+        // Check if level has been beaten quicker than achievement time
+        CheckAchievementTimes(levelCompletionTime, levelCompletionName);
+        
         // Get the 3 best times for the level
         float[] times = GetTop3Times(levelCompletionName);
 
@@ -30,6 +41,15 @@ public class LevelCompletionTime : MonoBehaviour
 
         print($"TIMES {string.Join(", ", updatedTimes)}");
         SaveTop3Times(updatedTimes, levelCompletionName);
+    }
+
+    private void CheckAchievementTimes(float levelCompletionTime, string levelCompletionName)
+    {
+        if (levelCompletionTime < _achievementTimes[levelCompletionName])
+        {
+            CollectableManager.Instance.UnlockCollectable($"time_{levelCompletionName}");
+            print($"Unlocked {levelCompletionName}");
+        }
     }
 
     private void SaveTop3Times(float[] updatedTimes, string levelCompletionName)

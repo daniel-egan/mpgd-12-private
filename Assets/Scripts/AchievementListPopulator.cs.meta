@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6922b0f05c31f244a89d29432e179c73
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - contentParent: {instanceID: 0}
+  - achievementPrefab: {fileID: 5529768582811838552, guid: 85ea6b2f2f21a0e49aafe682aff872b3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
