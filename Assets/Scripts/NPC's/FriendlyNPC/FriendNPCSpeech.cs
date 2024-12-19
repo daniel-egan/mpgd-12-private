@@ -41,7 +41,7 @@ public class FriendNPCSpeech : MonoBehaviour
         Speech.text = "I have lost my last oxygen tank and this one's about to run out";
         yield return new WaitForSeconds(3f);
 
-        Speech.text = "Please may you help and find it for me?";
+        Speech.text = "Please may you help and find it for me? I reckon that pufferfish has something to do with it";
 
         Objectives.text = "Help find the diver's last oxygen tank";
     }
