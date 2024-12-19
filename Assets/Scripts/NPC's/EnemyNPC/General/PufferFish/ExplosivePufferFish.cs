@@ -9,7 +9,7 @@ public class ExpandSphere : MonoBehaviour
 
     void Start()
     {
-        originalScale = transform.localScale;
+        originalScale = transform.localScale;;
     }
 
     void Update()
