@@ -8,7 +8,7 @@ public class FreezePlayer : MonoBehaviour
     public float npcFreezeDuration = 5f;
 
     private CharacterController playerController;
-    private Rigidbody npcRigidbody;
+    private BoxCollider boxCollider;
 
     public Canvas splashScreen;
 
@@ -16,11 +16,11 @@ public class FreezePlayer : MonoBehaviour
 
     void Start()
     {
+        boxCollider = GetComponent<BoxCollider>();
         if (player != null)
         {
             playerController = player.GetComponent<CharacterController>();
         }
-        npcRigidbody = GetComponent<Rigidbody>(); 
     }
 
     void OnTriggerEnter(Collider other)
@@ -39,6 +39,7 @@ public class FreezePlayer : MonoBehaviour
             {
                 playerController.enabled = false;
                 splashScreen.gameObject.SetActive(true);
+                boxCollider.isTrigger = false;
                 StartCoroutine(UnfreezePlayerCoroutine());
                 
             }
@@ -56,7 +57,14 @@ public class FreezePlayer : MonoBehaviour
         if (playerController != null)
         {
             playerController.enabled = true;
+            StartCoroutine(EnableBoxCollider());
         }
+    }
+
+    IEnumerator EnableBoxCollider()
+    {
+        yield return new WaitForSeconds(npcFreezeDuration);
+        boxCollider.isTrigger = true;
     }
 
 }
