@@ -6,8 +6,8 @@ using TMPro;
 
 public class FriendNPCSpeech : MonoBehaviour
 {
-    public TextMeshProUGUI Speech;  // Reference to the TextMeshPro component
-    private bool hasSpoken = false; // To ensure speech happens only once
+    public TextMeshProUGUI Speech; 
+    private bool hasSpoken = false; 
     public TextMeshProUGUI Objectives;
 
     void Start()
@@ -17,22 +17,22 @@ public class FriendNPCSpeech : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the player enters the trigger zone and speech hasn't been done yet, and the oxygen tank is not found
+
         if (other.CompareTag("Player") && !hasSpoken)
         {
-            StartCoroutine(ChangeSpeech());  // Start the speech change coroutine
+            StartCoroutine(ChangeSpeech());  
         }
-        // If the tank has been found and speech hasn't happened yet, show the "Thank you!!!"
+
     }
 
     private void StartSpeech()
     {
-        Speech.text = "";  // Initially empty speech
+        Speech.text = "";
     }
 
     private IEnumerator ChangeSpeech()
     {
-        hasSpoken = true;  // Mark that speech has been triggered
+        hasSpoken = true;  
 
         Speech.text = "Hello Friend, I'm in need of some assistance";
         yield return new WaitForSeconds(3f);

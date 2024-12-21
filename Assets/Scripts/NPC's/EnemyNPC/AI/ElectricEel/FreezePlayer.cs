@@ -40,7 +40,7 @@ public class FreezePlayer : MonoBehaviour
                 playerController.enabled = false;
                 splashScreen.gameObject.SetActive(true);
                 StartCoroutine(UnfreezePlayerCoroutine());
-                Destroy(eel);
+                
             }
         }
     }
