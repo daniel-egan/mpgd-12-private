@@ -15,16 +15,15 @@ public class OxygenTankPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             // Update the objective text
             Completion.text = "Thank you so much!!! You will be rewarded";
             Speech.text = "";
+            Objectives.text = "Return the oxygen tank to the diver";
             BoxCollider boxCollider = Diver.GetComponent<BoxCollider>();
             Destroy(boxCollider);
 
             // Destroy the oxygen tank after pickup
             Destroy(gameObject);
-            
         }
     }
 }
