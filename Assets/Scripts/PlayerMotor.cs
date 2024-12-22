@@ -146,11 +146,11 @@ public class PlayerMotor : MonoBehaviour
         }
 
         //Handle upwards and downwards wallrunning
-        if (isHoldingWallRunUp)
+        if (isHoldingWallRunUp && isWallRunning)
         {
             WallRunUp();
         }
-        else if (isHoldingWallRunDown)
+        else if (isHoldingWallRunDown && isWallRunning)
         {
             WallRunDown();
         }
