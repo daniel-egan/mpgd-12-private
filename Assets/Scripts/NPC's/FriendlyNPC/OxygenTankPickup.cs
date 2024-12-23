@@ -22,6 +22,9 @@ public class OxygenTankPickup : MonoBehaviour
             BoxCollider boxCollider = Diver.GetComponent<BoxCollider>();
             Destroy(boxCollider);
 
+            // Unlock the achievement
+            CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
+
             // Destroy the oxygen tank after pickup
             Destroy(gameObject);
         }
