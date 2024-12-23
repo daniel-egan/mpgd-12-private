@@ -9,10 +9,11 @@ public class FriendNPCSpeech : MonoBehaviour
     public TextMeshProUGUI Speech; 
     private bool hasSpoken = false; 
     public TextMeshProUGUI Objectives;
+    public GameObject OxygenTank;
 
     void Start()
     {
-        StartSpeech();
+        Speech.text = "";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,12 +23,14 @@ public class FriendNPCSpeech : MonoBehaviour
         {
             StartCoroutine(ChangeSpeech());  
         }
-
     }
 
-    private void StartSpeech()
+    private void Update()
     {
-        Speech.text = "";
+        if (OxygenTank == null && hasSpoken)
+        {
+            Objectives.text = "";
+        } 
     }
 
     private IEnumerator ChangeSpeech()

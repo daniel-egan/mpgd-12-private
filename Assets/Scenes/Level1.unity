@@ -9803,6 +9803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speech: {fileID: 1290272479}
   Objectives: {fileID: 2036638850}
+  OxygenTank: {fileID: 1056485738}
 --- !u!4 &519670588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4240833797884143528, guid: 0a28ac2ef0db42f4b814ac87a891512e, type: 3}
