@@ -1,100 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class RandomMovement : MonoBehaviour
+public class FishMovement : MonoBehaviour
 {
-    NavMeshAgent agent;
-
-    [SerializeField] LayerMask groundLayer;
-
-    Vector3 destPoint;
-    bool walkpointSet;
-    [SerializeField] float range;
-
-    [SerializeField] Transform player; // Reference to the player's Transform
-    [SerializeField] float detectionRadius = 10f; // Zone radius to detect the player
-    [SerializeField] float fleeDistance = 15f; // Distance to flee from the player
-
-    bool isFleeing = false;
+    [SerializeField] float speed = 5f;          // Movement speed of the fish
+    [SerializeField] float range = 10f;         // Range for random movement in 3D space
+    [SerializeField] float maxVerticalAngle = 45f; // Maximum vertical angle (degrees)
+    private Vector3 targetPosition;             // Target position for the fish to move towards
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        // Set an initial random target position when the fish starts
+        SetRandomTargetPosition();
     }
 
     void Update()
     {
-        CheckPlayerDistance();
-        if (!isFleeing)
+        // Rotate the fish towards the target position (both horizontally and vertically)
+        RotateTowardsTarget();
+
+        // Move the fish forward in the direction it is facing
+        MoveForward();
+
+        // If the fish has reached its target, set a new target position
+        if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
         {
-            goForPatrol();
+            SetRandomTargetPosition();
         }
     }
 
-    void CheckPlayerDistance()
+    // Rotate the fish towards the target position (both horizontally and vertically)
+    void RotateTowardsTarget()
     {
-        if (player == null) return;
+        Vector3 direction = targetPosition - transform.position;  // Direction vector to the target
 
-        // Calculate the distance to the player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        // Clamp the vertical angle to be within the max allowed range (45 degrees)
+        direction.y = Mathf.Clamp(direction.y, -range * Mathf.Tan(Mathf.Deg2Rad * maxVerticalAngle), range * Mathf.Tan(Mathf.Deg2Rad * maxVerticalAngle));
 
-        // Check if the player is within the detection radius
-        if (distanceToPlayer < detectionRadius)
+        if (direction != Vector3.zero)
         {
-            Debug.Log("Player detected within zone. Fleeing...");
-            FleeFromPlayer();
+            Quaternion targetRotation = Quaternion.LookRotation(direction);  // Calculate the required rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);  // Smooth rotation
         }
     }
 
-    void FleeFromPlayer()
+    // Move the fish forward in the direction it's facing
+    void MoveForward()
     {
-        isFleeing = true;
-
-        // Calculate a direction vector away from the player
-        Vector3 directionAway = (transform.position - player.position).normalized;
-        Vector3 fleeDestination = transform.position + directionAway * fleeDistance;
-
-        // Validate the flee destination
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(fleeDestination, out hit, range, NavMesh.AllAreas))
-        {
-            agent.SetDestination(hit.position);
-            Debug.Log($"Fleeing to position: {hit.position}");
-        }
-        else
-        {
-            Debug.LogWarning("Could not find a valid flee position!");
-        }
-
-        // Stop fleeing after some time
-        StartCoroutine(StopFleeing());
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);  // Move the fish in the direction it's facing
     }
 
-    IEnumerator StopFleeing()
+    // Set a random target position within a specified range (random on all axes)
+    void SetRandomTargetPosition()
     {
-        yield return new WaitForSeconds(3f); // Flee for 3 seconds
-        isFleeing = false;
-        Debug.Log("Stopped fleeing. Resuming patrol.");
-    }
-
-    void goForPatrol()
-    {
-        if (!walkpointSet) SearchForDest();
-        if (walkpointSet) agent.SetDestination(destPoint);
-        if (Vector3.Distance(transform.position, destPoint) < 10) walkpointSet = false;
-    }
-
-    void SearchForDest()
-    {
-        float z = Random.Range(-range, range);
+        // Generate random values for X, Y, and Z within the specified range
         float x = Random.Range(-range, range);
-        float y = Random.Range(-range, range);
-        destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-        if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
-        {
-            walkpointSet = true;
-        }
+        float y = Random.Range(-range, range);  // Can move up or down
+        float z = Random.Range(-range, range);
+
+        // Set the target position relative to the fish's current position
+        targetPosition = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z + z);
+
+        // Clamp the vertical position to prevent the target from being too high or low
+        targetPosition.y = Mathf.Clamp(targetPosition.y, transform.position.y - range * Mathf.Tan(Mathf.Deg2Rad * maxVerticalAngle), transform.position.y + range * Mathf.Tan(Mathf.Deg2Rad * maxVerticalAngle));
     }
 }
