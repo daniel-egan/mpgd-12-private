@@ -23,6 +23,12 @@
       "name": "Speed Demon",
       "description": "Complete level three quicker than the developers at 300 seconds",
       "isUnlocked": false
+    },
+    {
+      "id": "oxygen_pickup",
+      "name": "Room to breath",
+      "description": "Give the oxygen tank back to the NPC in level 1",
+      "isUnlocked": false
     }
   ]
 }
