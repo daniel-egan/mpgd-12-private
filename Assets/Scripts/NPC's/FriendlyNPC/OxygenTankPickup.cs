@@ -10,6 +10,7 @@ public class OxygenTankPickup : MonoBehaviour
     public GameObject Diver;
     public Text Objectives;
     public TextMeshProUGUI Speech;
+    public Image OxygenTankIcon;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +21,7 @@ public class OxygenTankPickup : MonoBehaviour
             Speech.text = "";
             Objectives.text = "Return the oxygen tank to the diver";
             BoxCollider boxCollider = Diver.GetComponent<BoxCollider>();
+            OxygenTankIcon.gameObject.SetActive(true);
             Destroy(boxCollider);
 
             // Unlock the achievement
