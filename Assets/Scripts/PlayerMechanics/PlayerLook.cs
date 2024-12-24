@@ -33,13 +33,4 @@ public class PlayerLook : MonoBehaviour
         // Rotate player to look left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
-
-    public void SetCameraTilt(float targetTilt)
-    {
-        currentTilt = Mathf.Lerp(currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
-
-        // Update local rotation to include tilt
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, currentTilt);
-    }
-
 }
