@@ -62,6 +62,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WallrunUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""863198f5-d256-48ea-bbb0-1440b9ad6fea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WallrunDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""567a0bdd-5571-4752-ae9d-a91483ec6efc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""6468e919-3fa5-4e58-a9a4-970f30c8effb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +179,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a8075af-c057-4469-b9d5-381b3f50b6a7"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WallrunUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b36c34e8-6671-4b42-8764-621ab0bbc7bf"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WallrunDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d44a65ac-ec6a-470a-9ad7-fd78a2991648"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +224,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_actionMapMain_Jump = m_actionMapMain.FindAction("Jump", throwIfNotFound: true);
         m_actionMapMain_Look = m_actionMapMain.FindAction("Look", throwIfNotFound: true);
         m_actionMapMain_Reset = m_actionMapMain.FindAction("Reset", throwIfNotFound: true);
+        m_actionMapMain_WallrunUp = m_actionMapMain.FindAction("WallrunUp", throwIfNotFound: true);
+        m_actionMapMain_WallrunDown = m_actionMapMain.FindAction("WallrunDown", throwIfNotFound: true);
+        m_actionMapMain_Grapple = m_actionMapMain.FindAction("Grapple", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +292,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_actionMapMain_Jump;
     private readonly InputAction m_actionMapMain_Look;
     private readonly InputAction m_actionMapMain_Reset;
+    private readonly InputAction m_actionMapMain_WallrunUp;
+    private readonly InputAction m_actionMapMain_WallrunDown;
+    private readonly InputAction m_actionMapMain_Grapple;
     public struct ActionMapMainActions
     {
         private @PlayerInput m_Wrapper;
@@ -237,6 +303,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_actionMapMain_Jump;
         public InputAction @Look => m_Wrapper.m_actionMapMain_Look;
         public InputAction @Reset => m_Wrapper.m_actionMapMain_Reset;
+        public InputAction @WallrunUp => m_Wrapper.m_actionMapMain_WallrunUp;
+        public InputAction @WallrunDown => m_Wrapper.m_actionMapMain_WallrunDown;
+        public InputAction @Grapple => m_Wrapper.m_actionMapMain_Grapple;
         public InputActionMap Get() { return m_Wrapper.m_actionMapMain; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +327,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
+            @WallrunUp.started += instance.OnWallrunUp;
+            @WallrunUp.performed += instance.OnWallrunUp;
+            @WallrunUp.canceled += instance.OnWallrunUp;
+            @WallrunDown.started += instance.OnWallrunDown;
+            @WallrunDown.performed += instance.OnWallrunDown;
+            @WallrunDown.canceled += instance.OnWallrunDown;
+            @Grapple.started += instance.OnGrapple;
+            @Grapple.performed += instance.OnGrapple;
+            @Grapple.canceled += instance.OnGrapple;
         }
 
         private void UnregisterCallbacks(IActionMapMainActions instance)
@@ -274,6 +352,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
+            @WallrunUp.started -= instance.OnWallrunUp;
+            @WallrunUp.performed -= instance.OnWallrunUp;
+            @WallrunUp.canceled -= instance.OnWallrunUp;
+            @WallrunDown.started -= instance.OnWallrunDown;
+            @WallrunDown.performed -= instance.OnWallrunDown;
+            @WallrunDown.canceled -= instance.OnWallrunDown;
+            @Grapple.started -= instance.OnGrapple;
+            @Grapple.performed -= instance.OnGrapple;
+            @Grapple.canceled -= instance.OnGrapple;
         }
 
         public void RemoveCallbacks(IActionMapMainActions instance)
@@ -297,5 +384,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
+        void OnWallrunUp(InputAction.CallbackContext context);
+        void OnWallrunDown(InputAction.CallbackContext context);
+        void OnGrapple(InputAction.CallbackContext context);
     }
 }
