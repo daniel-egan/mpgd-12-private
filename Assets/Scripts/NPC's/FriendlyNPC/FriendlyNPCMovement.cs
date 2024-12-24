@@ -8,7 +8,8 @@ using TMPro;
 public class FriendlyNPCMovement : MonoBehaviour
 {
     [SerializeField] private Animator npcAnimator;
-    public TextMeshProUGUI Objectives;
+    public Text Objectives;
+
     void Start()
     {
         FindObjectives();
