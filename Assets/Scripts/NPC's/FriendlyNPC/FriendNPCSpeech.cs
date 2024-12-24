@@ -7,9 +7,10 @@ using TMPro;
 public class FriendNPCSpeech : MonoBehaviour
 {
     public TextMeshProUGUI Speech; 
-    private bool hasSpoken = false; 
-    public TextMeshProUGUI Objectives;
+    private bool hasSpoken = false;
+    public Text Objectives;
     public GameObject OxygenTank;
+
 
     void Start()
     {
@@ -23,14 +24,15 @@ public class FriendNPCSpeech : MonoBehaviour
         {
             StartCoroutine(ChangeSpeech());  
         }
+
+        if (other.CompareTag("Player") && GameObject.Find("OxygenTank") == null)
+        {
+            Objectives.text = "";
+        }
     }
 
     private void Update()
     {
-        if (OxygenTank == null && hasSpoken)
-        {
-            Objectives.text = "";
-        } 
     }
 
     private IEnumerator ChangeSpeech()

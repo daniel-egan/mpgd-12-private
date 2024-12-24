@@ -8,7 +8,7 @@ public class OxygenTankPickup : MonoBehaviour
 {
     public TextMeshProUGUI Completion;
     public GameObject Diver;
-    public TextMeshProUGUI Objectives;
+    public Text Objectives;
     public TextMeshProUGUI Speech;
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +23,7 @@ public class OxygenTankPickup : MonoBehaviour
             Destroy(boxCollider);
 
             // Unlock the achievement
-            CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
+            //CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
 
             // Destroy the oxygen tank after pickup
             Destroy(gameObject);
