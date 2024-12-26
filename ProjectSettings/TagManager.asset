@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - MovingPlatform
   - EnemySquid
+  - Projectile
+  - DestroyWall
   layers:
   - Default
   - TransparentFX
