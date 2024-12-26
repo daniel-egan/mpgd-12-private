@@ -8,6 +8,7 @@ public class ProjectileBehavior : MonoBehaviour
     public float speed = 10f;
     private Vector3 direction;
     public Canvas splashScreen;
+    public GameObject DestroyableWall;
 
     public void Initialize(Transform target)
     {
@@ -28,14 +29,12 @@ public class ProjectileBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             splashScreen.gameObject.SetActive(true);
-            StartCoroutine(DisableSplashScreenAfterTime(5f));
         }
-    }
-
-    IEnumerator DisableSplashScreenAfterTime(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        splashScreen.gameObject.SetActive(false);
+        if (other.CompareTag("DestroyWall"))
+        {
+            Debug.Log("Hit wall");
+            Destroy(DestroyableWall);
+        }
     }
 }
 

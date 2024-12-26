@@ -7,33 +7,38 @@ using TMPro;
 public class FriendNPCSpeech : MonoBehaviour
 {
     public TextMeshProUGUI Speech; 
-    private bool hasSpoken = false; 
-    public TextMeshProUGUI Objectives;
+    private int hasSpoken = 0;
+    public Text Objectives;
+    public GameObject OxygenTank;
+    public Image OxygenTankIcon;
+
+
 
     void Start()
-    {
-        StartSpeech();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.CompareTag("Player") && !hasSpoken)
-        {
-            StartCoroutine(ChangeSpeech());  
-        }
-
-    }
-
-    private void StartSpeech()
     {
         Speech.text = "";
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (hasSpoken == 0)
+            {
+                StartCoroutine(ChangeSpeech());
+                
+            }
+        }
+    }
+
+    private void Update()
+    {
+    }
+
     private IEnumerator ChangeSpeech()
     {
-        hasSpoken = true;  
-
+        hasSpoken += 1;
         Speech.text = "Hello Friend, I'm in need of some assistance";
         yield return new WaitForSeconds(3f);
 
