@@ -24,9 +24,6 @@ public class OxygenTankPickup : MonoBehaviour
             OxygenTankIcon.gameObject.SetActive(true);
             Destroy(boxCollider);
 
-            // Unlock the achievement
-            //CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
-
             // Destroy the oxygen tank after pickup
             Destroy(gameObject);
         }
