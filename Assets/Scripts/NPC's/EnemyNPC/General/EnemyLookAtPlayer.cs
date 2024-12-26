@@ -11,12 +11,10 @@ public class EnemyLookAtPlayer : MonoBehaviour
     }
     void Update()
     {
-        if (gameObject.CompareTag("EnemySquid")){
-            Vector3 directionToPlayer = player.transform.position - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            Quaternion offsetRotation = Quaternion.Euler(0, 0, 0);
-            transform.rotation = lookRotation * offsetRotation;
-        }
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        Quaternion offsetRotation = Quaternion.Euler(0, 90, 0);
+        transform.rotation = lookRotation * offsetRotation;
 
     }
 }
