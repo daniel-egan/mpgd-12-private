@@ -13,6 +13,12 @@ public class FriendNPCSpeech : MonoBehaviour
     public Image OxygenTankIcon;
 
 
+    public GameObject Player;
+    public GameObject MainCamera;
+    public GameObject NPCCamera;
+    public GameObject Canvas;
+
+
 
     void Start()
     {
@@ -26,6 +32,11 @@ public class FriendNPCSpeech : MonoBehaviour
         {
             if (hasSpoken == 0)
             {
+                Player.gameObject.SetActive(false);
+                Canvas.gameObject.SetActive(false);
+
+                NPCCamera.gameObject.SetActive(true);
+                MainCamera.gameObject.SetActive(false);
                 StartCoroutine(ChangeSpeech());
                 
             }
@@ -47,7 +58,15 @@ public class FriendNPCSpeech : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Speech.text = "Please may you help and find it for me? I reckon that pufferfish has something to do with it";
+        yield return new WaitForSeconds(3f);
 
         Objectives.text = "Help find the diver's last oxygen tank";
+        yield return new WaitForSeconds(3f);
+
+        Player.gameObject.SetActive(true);
+        Canvas.gameObject.SetActive(true);
+
+        MainCamera.gameObject.SetActive(true);
+        NPCCamera.gameObject.SetActive(false);
     }
 }
