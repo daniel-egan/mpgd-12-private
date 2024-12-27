@@ -56,6 +56,7 @@ public class PlayerMotor : MonoBehaviour
     public bool isGrappling = false; // Whether the player is currently grappling
     private Vector3 grapplePoint; // Point the grapple is attached to
     private bool dashedBeforeGrapple = false;
+    public float grappleFOV = 100f;
 
     //variables for super dash
     public int instantCooldownCount = 0; // Counter for instant cooldowns
@@ -504,6 +505,8 @@ public class PlayerMotor : MonoBehaviour
             grappleLine.SetPosition(0, transform.position);
             grappleLine.SetPosition(1, grapplePoint);
 
+            StartFOVTransition(grappleFOV);
+
             // Reset the dash cooldown if dashed before grappling
             if (dashedBeforeGrapple)
             {
@@ -564,6 +567,8 @@ public class PlayerMotor : MonoBehaviour
 
         // Reset vertical velocity
         playerVelocity.y = -2f;
+
+        StartFOVTransition(normalFOV);
 
         // Update grounded state
         isGrounded = controller.isGrounded;
