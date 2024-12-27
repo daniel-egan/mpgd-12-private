@@ -22,6 +22,9 @@ public class ReturnOxygenTank : MonoBehaviour
         {
             Objectives.text = "";
             OxygenTankIcon.gameObject.SetActive(false);
+
+            // Unlock the achievement
+            CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
         }
     }
 
