@@ -77,6 +77,7 @@ public class PlayerMotor : MonoBehaviour
         {
             dashedBeforeGrapple = false; //Reset flag when grounded
             isGrappling = false; //Stop grappling when grounded
+            grappleLine.enabled = false;
             canSuperCount = false;
 
             if (Time.time - lastCountTime >= 3f)
@@ -123,8 +124,8 @@ public class PlayerMotor : MonoBehaviour
         if (isDashing || isSuperDashing)
         {
             lastDashTime = Time.time;
-            //playerVelocity.x = 0;
-            //playerVelocity.z = 0;
+            playerVelocity.x = 0;
+            playerVelocity.z = 0;
             if (isSuperDashing)
             {
                 Debug.Log("SUPER DASH");
@@ -295,6 +296,7 @@ public class PlayerMotor : MonoBehaviour
         if (playerVelocity.y > 0 && !isHoldingWallRunUp && !isHoldingWallRunDown) return; // Ignore wall running if jumping
 
         isWallRunning = true;
+        canSuperCount = false;
 
         // Cancel gravity while wall running
         if (!isHoldingWallRunUp && !isHoldingWallRunDown)
@@ -365,7 +367,7 @@ public class PlayerMotor : MonoBehaviour
         dashedBeforeGrapple = true; // Set the flag when dashing starts
 
         //lastDashTime = Time.time;
-        
+
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
@@ -495,7 +497,36 @@ public class PlayerMotor : MonoBehaviour
     {
         isGrappling = false;
         grappleLine.enabled = false;
-        dashedBeforeGrapple = false; // Ensure flag is reset when grapple ends
+
+        if (dashedBeforeGrapple) // Ensure a dash occurred before the grapple
+        {
+            canSuperCount = true; // Allow the counter to increment
+            dashedBeforeGrapple = false; // Reset the flag to prevent multiple increments
+
+            // Increment the super dash counter and update the UI
+            instantCooldownCount++;
+            lastCountTime = Time.time;
+            superDashCounterBar.value = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
+
+            Debug.Log("Super Dash Counter Incremented!");
+        }
+
+        // Snap player to the ground after grappling
+        if (!isGrounded)
+        {
+            Ray groundRay = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(groundRay, out RaycastHit hit, 2f, grappleLayer))
+            {
+                controller.Move(Vector3.down * (hit.distance - 0.1f)); // Slight adjustment to ground level
+            }
+        }
+
+        // Reset vertical velocity
+        playerVelocity.y = -2f;
+
+        // Update grounded state
+        isGrounded = controller.isGrounded;
     }
+
 
 }
