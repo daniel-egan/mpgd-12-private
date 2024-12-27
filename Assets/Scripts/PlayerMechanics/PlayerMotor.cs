@@ -24,6 +24,7 @@ public class PlayerMotor : MonoBehaviour
     public float wallRunJumpForce = 8f;
     public RaycastHit hitRight;
     public RaycastHit hitLeft;
+    private Rigidbody rb;
 
     private bool isTouchingWall = false;
     public Vector3 wallNormal;
@@ -79,6 +80,9 @@ public class PlayerMotor : MonoBehaviour
         {
             playerCamera.fieldOfView = normalFOV;
         }
+
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     // Update is called once per frame
