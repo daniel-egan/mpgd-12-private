@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     public bool isGrounded;
-    public float speed = 5f;
+    public float speed = 10f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
 
@@ -42,6 +42,11 @@ public class PlayerMotor : MonoBehaviour
     private float lastDashTime = 0f;
     private bool forcedDashCooldownUI = false;
     private bool isCooldownFull = false;
+    public float normalFOV = 90f;
+    public float dashFOV = 120f;
+    public float fovTransitionSpeed = 10f;
+    private Camera playerCamera;
+    private Coroutine activeFOVCoroutine;
 
     // variables for grappling
     public float grappleSpeed = 20f; // Speed of the grapple pull
@@ -60,12 +65,19 @@ public class PlayerMotor : MonoBehaviour
     private bool canSuperCount = false;
     private bool isSuperDashing = false;
     private float lastCountTime = 0f;
+    public float superdashFOV = 150f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        playerCamera = Camera.main;
+        if (playerCamera != null)
+        {
+            playerCamera.fieldOfView = normalFOV;
+        }
     }
 
     // Update is called once per frame
@@ -368,7 +380,9 @@ public class PlayerMotor : MonoBehaviour
 
         //lastDashTime = Time.time;
 
+        StartFOVTransition(dashFOV);
         yield return new WaitForSeconds(dashDuration);
+        StartFOVTransition(normalFOV);
 
         isDashing = false;
 
@@ -390,7 +404,9 @@ public class PlayerMotor : MonoBehaviour
         superDashCounterBar.value = 0f;
         instantCooldownCount = 0;
 
+        StartFOVTransition(superdashFOV);
         yield return new WaitForSeconds(dashDuration);
+        StartFOVTransition(normalFOV);
 
         isSuperDashing = false;
 
@@ -400,6 +416,31 @@ public class PlayerMotor : MonoBehaviour
             canDash = true;
             forcedDashCooldownUI = true;
         }
+    }
+
+    private IEnumerator ChangeFOV(float targetFOV)
+    {
+        if (playerCamera == null) yield break;
+
+        while (Mathf.Abs(playerCamera.fieldOfView - targetFOV) > 0.1f)
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        playerCamera.fieldOfView = targetFOV; // Ensure the FOV reaches the exact value
+    }
+
+    private void StartFOVTransition(float targetFOV)
+    {
+        // Stop the current FOV coroutine if it's active
+        if (activeFOVCoroutine != null)
+        {
+            StopCoroutine(activeFOVCoroutine);
+        }
+
+        // Start a new FOV coroutine and track it
+        activeFOVCoroutine = StartCoroutine(ChangeFOV(targetFOV));
     }
 
 

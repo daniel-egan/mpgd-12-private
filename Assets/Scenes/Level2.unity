@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
-  speed: 5
+  speed: 10
   gravity: -9.8
   jumpHeight: 3
   isWallRunning: 0
@@ -1132,6 +1132,9 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2
   dashCooldownBar: {fileID: 1131795303}
+  normalFOV: 90
+  dashFOV: 120
+  fovTransitionSpeed: 10
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
