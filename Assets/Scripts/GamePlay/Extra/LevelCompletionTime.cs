@@ -19,6 +19,15 @@ public class LevelCompletionTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TextMeshProUGUI timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
+
+        if (!GlobalSettingsManager.Instance.IsTimerOn)
+        {
+            this.enabled = false;
+            timeText.enabled = false;
+            return;
+        }
+
         // Get the most recent time
         var levelCompletionTime = PlayerPrefs.GetFloat("LevelCompletionTime");
         print(levelCompletionTime);
@@ -27,7 +36,6 @@ public class LevelCompletionTime : MonoBehaviour
         var levelCompletionName = PlayerPrefs.GetString("LevelCompletionName");
         print(levelCompletionName);
 
-        TextMeshProUGUI timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
         timeText.text = $"{levelCompletionName} completed in {levelCompletionTime}";
 
         // Check if level has been beaten quicker than achievement time
