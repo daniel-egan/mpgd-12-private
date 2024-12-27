@@ -49,6 +49,13 @@ public class Timer : MonoBehaviour
     {
         // This gets the UI text that corresponds to the "Current Time"
         _stopwatchText = GetComponent<TextMeshProUGUI>();
+
+        if (!GlobalSettingsManager.Instance.IsTimerOn)
+        {
+            this.enabled = false;
+            _stopwatchText.enabled = false;
+            return;
+        }
     }
 
     private void Update()
