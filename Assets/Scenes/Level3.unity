@@ -2087,10 +2087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a556d057cedd21b44883c3f659945a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 30
+  radius: 20
   speed: 50
-  chaseSpeed: 5
-  chaseDistance: 1
+  chaseSpeed: 20
+  chaseDistance: 15
   turnSpeed: 5
   angle: 180
   lookingAtPlayer: 0
@@ -4469,12 +4469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a556d057cedd21b44883c3f659945a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 30
+  radius: 20
   speed: 50
-  chaseSpeed: 5
-  chaseDistance: 1
+  chaseSpeed: 20
+  chaseDistance: 15
   turnSpeed: 5
-  angle: 180
+  angle: 0
   lookingAtPlayer: 0
   player: {fileID: 1898803567}
 --- !u!1001 &879546226

@@ -91,4 +91,12 @@ public class NPCRotateAroundCenter : MonoBehaviour
             lookingAtPlayer = true; // Start looking at the player
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the player enters the trigger zone
+        if (other.CompareTag("Player"))
+        {
+            lookingAtPlayer = false; // Start looking at the player
+        }
+    }
 }

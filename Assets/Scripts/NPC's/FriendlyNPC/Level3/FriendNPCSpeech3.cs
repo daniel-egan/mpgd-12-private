@@ -64,7 +64,7 @@ public class FriendNPCSpeech3 : MonoBehaviour
         Speech.text = "I am in need of one more oxygen tank before your journeys end";
         yield return new WaitForSeconds(3f);
 
-        Speech.text = "This tank may be the most difficult to retrieve, guarded by those sharks over their";
+        Speech.text = "This tank may be the most difficult to retrieve, guarded by those sharks over there";
         yield return new WaitForSeconds(3f);
 
         SharkCam.gameObject.SetActive(true);
@@ -80,7 +80,7 @@ public class FriendNPCSpeech3 : MonoBehaviour
         NPCCam.gameObject.SetActive(true);
         TankCam.gameObject.SetActive(false);
 
-        Speech.text = "Be wary, the sharks may attack you if you give them a reason";
+        Speech.text = "Be wary, the sharks are very DANGEROUS and may attack you";
         yield return new WaitForSeconds(3f);
 
         SharkAttackCam.gameObject.SetActive(true);
