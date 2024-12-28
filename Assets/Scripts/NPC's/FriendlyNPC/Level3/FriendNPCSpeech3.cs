@@ -20,7 +20,11 @@ public class FriendNPCSpeech3 : MonoBehaviour
     public GameObject TankCam;
     public GameObject SharkAttackCam;
     public GameObject Canvas;
+
+
     public GameObject SharkAttack;
+    public GameObject Livefish;
+    public GameObject Skeletonfish;
 
 
     void Start()
@@ -81,8 +85,17 @@ public class FriendNPCSpeech3 : MonoBehaviour
 
         SharkAttackCam.gameObject.SetActive(true);
         SharkAttack.gameObject.SetActive(true);
+        Livefish.gameObject.SetActive(true);
         NPCCam.gameObject.SetActive(false);
+        yield return new WaitForSeconds(3.2f);
+
+
+        
+        Livefish.gameObject.SetActive(false);
+        Skeletonfish.gameObject.SetActive(true);
+        SharkAttack.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
+
 
 
 
