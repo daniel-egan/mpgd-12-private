@@ -18,8 +18,9 @@ public class FriendNPCSpeech3 : MonoBehaviour
     public GameObject NPCCam;
     public GameObject SharkCam;
     public GameObject TankCam;
+    public GameObject SharkAttackCam;
     public GameObject Canvas;
-
+    public GameObject SharkAttack;
 
 
     void Start()
@@ -74,7 +75,21 @@ public class FriendNPCSpeech3 : MonoBehaviour
 
         NPCCam.gameObject.SetActive(true);
         TankCam.gameObject.SetActive(false);
+
+        Speech.text = "Be wary, the sharks may attack you if you give them a reason";
         yield return new WaitForSeconds(3f);
+
+        SharkAttackCam.gameObject.SetActive(true);
+        SharkAttack.gameObject.SetActive(true);
+        NPCCam.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+
+
+
+        NPCCam.gameObject.SetActive(true);
+        SharkAttack.gameObject.SetActive(false);
+        SharkAttackCam.gameObject.SetActive(false);
+
 
         Speech.text = "Please help me and retrieve it";
         yield return new WaitForSeconds(3f);
