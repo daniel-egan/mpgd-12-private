@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     public bool isGrounded;
-    public float speed = 5f;
+    public float speed = 10f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
 
@@ -24,6 +24,7 @@ public class PlayerMotor : MonoBehaviour
     public float wallRunJumpForce = 8f;
     public RaycastHit hitRight;
     public RaycastHit hitLeft;
+    private Rigidbody rb;
 
     private bool isTouchingWall = false;
     public Vector3 wallNormal;
@@ -42,6 +43,11 @@ public class PlayerMotor : MonoBehaviour
     private float lastDashTime = 0f;
     private bool forcedDashCooldownUI = false;
     private bool isCooldownFull = false;
+    public float normalFOV = 90f;
+    public float dashFOV = 120f;
+    public float fovTransitionSpeed = 10f;
+    private Camera playerCamera;
+    private Coroutine activeFOVCoroutine;
 
     // variables for grappling
     public float grappleSpeed = 20f; // Speed of the grapple pull
@@ -51,6 +57,7 @@ public class PlayerMotor : MonoBehaviour
     public bool isGrappling = false; // Whether the player is currently grappling
     private Vector3 grapplePoint; // Point the grapple is attached to
     private bool dashedBeforeGrapple = false;
+    public float grappleFOV = 100f;
 
     //variables for super dash
     public int instantCooldownCount = 0; // Counter for instant cooldowns
@@ -60,12 +67,22 @@ public class PlayerMotor : MonoBehaviour
     private bool canSuperCount = false;
     private bool isSuperDashing = false;
     private float lastCountTime = 0f;
+    public float superdashFOV = 150f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        playerCamera = Camera.main;
+        if (playerCamera != null)
+        {
+            playerCamera.fieldOfView = normalFOV;
+        }
+
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -77,6 +94,7 @@ public class PlayerMotor : MonoBehaviour
         {
             dashedBeforeGrapple = false; //Reset flag when grounded
             isGrappling = false; //Stop grappling when grounded
+            grappleLine.enabled = false;
             canSuperCount = false;
 
             if (Time.time - lastCountTime >= 3f)
@@ -123,8 +141,8 @@ public class PlayerMotor : MonoBehaviour
         if (isDashing || isSuperDashing)
         {
             lastDashTime = Time.time;
-            //playerVelocity.x = 0;
-            //playerVelocity.z = 0;
+            playerVelocity.x = 0;
+            playerVelocity.z = 0;
             if (isSuperDashing)
             {
                 Debug.Log("SUPER DASH");
@@ -295,6 +313,7 @@ public class PlayerMotor : MonoBehaviour
         if (playerVelocity.y > 0 && !isHoldingWallRunUp && !isHoldingWallRunDown) return; // Ignore wall running if jumping
 
         isWallRunning = true;
+        canSuperCount = false;
 
         // Cancel gravity while wall running
         if (!isHoldingWallRunUp && !isHoldingWallRunDown)
@@ -365,8 +384,10 @@ public class PlayerMotor : MonoBehaviour
         dashedBeforeGrapple = true; // Set the flag when dashing starts
 
         //lastDashTime = Time.time;
-        
+
+        StartFOVTransition(dashFOV);
         yield return new WaitForSeconds(dashDuration);
+        StartFOVTransition(normalFOV);
 
         isDashing = false;
 
@@ -388,7 +409,9 @@ public class PlayerMotor : MonoBehaviour
         superDashCounterBar.value = 0f;
         instantCooldownCount = 0;
 
+        StartFOVTransition(superdashFOV);
         yield return new WaitForSeconds(dashDuration);
+        StartFOVTransition(normalFOV);
 
         isSuperDashing = false;
 
@@ -398,6 +421,31 @@ public class PlayerMotor : MonoBehaviour
             canDash = true;
             forcedDashCooldownUI = true;
         }
+    }
+
+    private IEnumerator ChangeFOV(float targetFOV)
+    {
+        if (playerCamera == null) yield break;
+
+        while (Mathf.Abs(playerCamera.fieldOfView - targetFOV) > 0.1f)
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        playerCamera.fieldOfView = targetFOV; // Ensure the FOV reaches the exact value
+    }
+
+    private void StartFOVTransition(float targetFOV)
+    {
+        // Stop the current FOV coroutine if it's active
+        if (activeFOVCoroutine != null)
+        {
+            StopCoroutine(activeFOVCoroutine);
+        }
+
+        // Start a new FOV coroutine and track it
+        activeFOVCoroutine = StartCoroutine(ChangeFOV(targetFOV));
     }
 
 
@@ -461,6 +509,8 @@ public class PlayerMotor : MonoBehaviour
             grappleLine.SetPosition(0, transform.position);
             grappleLine.SetPosition(1, grapplePoint);
 
+            StartFOVTransition(grappleFOV);
+
             // Reset the dash cooldown if dashed before grappling
             if (dashedBeforeGrapple)
             {
@@ -495,7 +545,38 @@ public class PlayerMotor : MonoBehaviour
     {
         isGrappling = false;
         grappleLine.enabled = false;
-        dashedBeforeGrapple = false; // Ensure flag is reset when grapple ends
+
+        if (dashedBeforeGrapple) // Ensure a dash occurred before the grapple
+        {
+            canSuperCount = true; // Allow the counter to increment
+            dashedBeforeGrapple = false; // Reset the flag to prevent multiple increments
+
+            // Increment the super dash counter and update the UI
+            instantCooldownCount++;
+            lastCountTime = Time.time;
+            superDashCounterBar.value = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
+
+            Debug.Log("Super Dash Counter Incremented!");
+        }
+
+        // Snap player to the ground after grappling
+        if (!isGrounded)
+        {
+            Ray groundRay = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(groundRay, out RaycastHit hit, 2f, grappleLayer))
+            {
+                controller.Move(Vector3.down * (hit.distance - 0.1f)); // Slight adjustment to ground level
+            }
+        }
+
+        // Reset vertical velocity
+        playerVelocity.y = -2f;
+
+        StartFOVTransition(normalFOV);
+
+        // Update grounded state
+        isGrounded = controller.isGrounded;
     }
+
 
 }
