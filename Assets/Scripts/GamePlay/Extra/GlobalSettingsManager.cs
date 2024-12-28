@@ -7,6 +7,8 @@ public class GlobalSettingsManager : MonoBehaviour
     public float MasterVolume { get; private set; }
     public bool IsMusicOn { get; private set; }
 
+    public bool IsTimerOn { get; private set; }
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,6 +28,7 @@ public class GlobalSettingsManager : MonoBehaviour
         // Load saved settings or set defaults
         MasterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
         IsMusicOn = PlayerPrefs.GetInt("MusicToggle", 1) == 1;
+        IsTimerOn = PlayerPrefs.GetInt("TimerToggle", 1) == 1;
 
         ApplySettings();
     }
@@ -41,13 +44,14 @@ public class GlobalSettingsManager : MonoBehaviour
             MusicManager.Instance.SetMusicState(IsMusicOn);
         }
 
-        Debug.Log("Settings applied: MasterVolume=" + MasterVolume + ", MusicToggle=" + IsMusicOn);
+        Debug.Log("Settings applied: MasterVolume=" + MasterVolume + ", MusicToggle=" + IsMusicOn + ", TimerToggle =" + IsTimerOn);
     }
 
-    public void SaveSettings(float masterVolume, bool isMusicOn)
+    public void SaveSettings(float masterVolume, bool isMusicOn, bool isTimerOn)
     {
         PlayerPrefs.SetFloat("MasterVolume", masterVolume);
         PlayerPrefs.SetInt("MusicToggle", isMusicOn ? 1 : 0);
+        PlayerPrefs.SetInt("TimerToggle", isTimerOn ? 1 : 0);
         PlayerPrefs.Save();
 
         LoadSettings(); // Immediately reapply settings after saving
