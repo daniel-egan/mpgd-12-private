@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
 
         ActionMapMain.WallrunUp.started += ctx => motor.isHoldingWallRunUp = true;
         ActionMapMain.WallrunUp.canceled += ctx => motor.isHoldingWallRunUp = false;
-        
+
         ActionMapMain.WallrunDown.started += ctx => motor.isHoldingWallRunDown = true;
         ActionMapMain.WallrunDown.canceled += ctx => motor.isHoldingWallRunDown = false;
 
@@ -44,6 +44,15 @@ public class InputManager : MonoBehaviour
     {
         //tell playermotor to move using value from movement action
         motor.ProcessMove(ActionMapMain.Movement.ReadValue<Vector2>());
+
+        if (motor.isWallRunning)
+        {
+            look.isWallRunning = true;
+        }
+        else
+        {
+            look.isWallRunning = false;
+        }
     }
 
     private void LateUpdate()
