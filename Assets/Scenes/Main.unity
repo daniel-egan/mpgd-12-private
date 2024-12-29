@@ -120,6 +120,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &219840715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 219840717}
+  - component: {fileID: 219840716}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &219840716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219840715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a9adf4df1b5c349840d9ee5b158339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleClip: {fileID: 8300000, guid: b69df19faf2394f428122da7ed21115b, type: 3}
+  jumpClip: {fileID: 8300000, guid: 86fda53552372d648afbc790b86cad42, type: 3}
+  dashClip: {fileID: 8300000, guid: 30582458a4012084396ba45e3e1cabeb, type: 3}
+  superDashClip: {fileID: 8300000, guid: 4a5cc1198c923ed46959baba311d21f2, type: 3}
+  soundEffectVolume: 1
+--- !u!4 &219840717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219840715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 434.39282, y: 100.46787, z: 288.47775}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &235844105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,3 +2370,4 @@ SceneRoots:
   - {fileID: 1022182685}
   - {fileID: 977306936}
   - {fileID: 1264639155}
+  - {fileID: 219840717}
