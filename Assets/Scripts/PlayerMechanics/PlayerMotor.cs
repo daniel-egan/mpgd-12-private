@@ -231,6 +231,7 @@ public class PlayerMotor : MonoBehaviour
             Debug.Log($"{lateralForce}");
             Debug.Log($"{wallNormal}");*/
 
+            SoundManager.Instance.PlayJump();
             Vector3 wallJumpForce = forwardForce + lateralForce + (Vector3.up * upwardForce);
             playerVelocity += wallJumpForce;
 
@@ -332,6 +333,7 @@ public class PlayerMotor : MonoBehaviour
             wallRunDirection = -wallRunDirection; // Invert direction if the wall is on the right
         }
 
+        //SoundManager.Instance.PlayWallrunning();
         // Apply the movement
         controller.Move(wallRunDirection * wallRunSpeed * Time.deltaTime);
     }

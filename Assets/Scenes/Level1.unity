@@ -4594,7 +4594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256b59736cdd848fe9d0622c9237ed27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 746217902}
+  cam: {fileID: 1542882734}
   xSensitivity: 90
   ySensitivity: 90
   wallRunTiltAngle: 15
@@ -4615,7 +4615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   speed: 10
-  gravity: -19.6
+  gravity: -9.8
   jumpHeight: 6
   isWallRunning: 0
   wallRunGravity: -2
@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256b59736cdd848fe9d0622c9237ed27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 746217902}
+  cam: {fileID: 0}
   xSensitivity: 90
   ySensitivity: 90
   wallRunTiltAngle: 15
@@ -9136,6 +9136,14 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 198000010118446818, guid: 0d1adb20421ed664b800c8cf3d103e70, type: 3}
+      propertyPath: SizeModule.y.maxCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010118446818, guid: 0d1adb20421ed664b800c8cf3d103e70, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 199000011340400198, guid: 0d1adb20421ed664b800c8cf3d103e70, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -11178,6 +11186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41fd95148ccd2541973b06f882e6b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  distance: 5
+  startDirection: 1
 --- !u!65 &293623285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13843,6 +13854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41fd95148ccd2541973b06f882e6b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  distance: 5
+  startDirection: 1
 --- !u!65 &356289180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28405,11 +28419,6 @@ Transform:
 --- !u!1 &746217901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6281483056869696749, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
-  m_PrefabInstance: {fileID: 1498556724}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &746217902 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 620786689015028422, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
   m_PrefabInstance: {fileID: 1498556724}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &746217903
@@ -57713,6 +57722,11 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!20 &1542882734 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 620786689015028422, guid: 888757c43af98d144a157e5f905f07ec, type: 3}
+  m_PrefabInstance: {fileID: 121626414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1544983057
 GameObject:
   m_ObjectHideFlags: 0
@@ -78244,6 +78258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41fd95148ccd2541973b06f882e6b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  distance: 5
+  startDirection: 1
 --- !u!65 &2126058878
 BoxCollider:
   m_ObjectHideFlags: 0
