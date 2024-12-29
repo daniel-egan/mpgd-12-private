@@ -199,6 +199,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (isGrounded)
         {
+            SoundManager.Instance.PlayJump();
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
         else if (isWallRunning)
@@ -238,6 +239,7 @@ public class PlayerMotor : MonoBehaviour
                 {
                     StopCoroutine(dashCoroutine);
                 }
+                SoundManager.Instance.PlayDash();
                 dashCoroutine = StartCoroutine(PerformDash());
             }
         }
@@ -383,6 +385,7 @@ public class PlayerMotor : MonoBehaviour
     {
         canDash = false;
         isSuperDashing = true;
+        SoundManager.Instance.PlaySuperDash();
 
         dashCooldownBar.value = 0f;
         superDashCounterBar.value = 0f;
@@ -455,6 +458,7 @@ public class PlayerMotor : MonoBehaviour
             if (grapplePoint.y > transform.position.y) return;
 
             isGrappling = true;
+            SoundManager.Instance.PlayGrapple();
 
             // Visualize the grapple
             grappleLine.enabled = true;
