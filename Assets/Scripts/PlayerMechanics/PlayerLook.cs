@@ -17,6 +17,7 @@ public class PlayerLook : MonoBehaviour
     public float wallRunTiltAngle = 15f;
     public float tiltSpeed = 10f;
     public float currentTilt = 0f;
+    public bool isWallRunning = false;
 
     public void ProcessLook(Vector2 input)
     {
@@ -26,6 +27,16 @@ public class PlayerLook : MonoBehaviour
         // Calculate camera rotation for looking up and down
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+        if (isWallRunning)
+        {
+            // Add a tilt effect during wallrunning
+            currentTilt = Mathf.Lerp(currentTilt, wallRunTiltAngle, Time.deltaTime * tiltSpeed);
+        }
+        else
+        {
+            currentTilt = Mathf.Lerp(currentTilt, 0f, Time.deltaTime * tiltSpeed);
+        }
 
         // Combine xRotation for looking up/down with current tilt
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, currentTilt);
