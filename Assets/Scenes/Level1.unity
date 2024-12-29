@@ -1440,7 +1440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9170316909198469344, guid: c2b37abe35e81581d8e2016393257b1d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4600,6 +4600,7 @@ MonoBehaviour:
   wallRunTiltAngle: 15
   tiltSpeed: 10
   currentTilt: 0
+  isWallRunning: 0
 --- !u!114 &121626420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4632,6 +4633,9 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2
   dashCooldownBar: {fileID: 724850804}
+  normalFOV: 90
+  dashFOV: 120
+  fovTransitionSpeed: 10
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
@@ -4639,10 +4643,12 @@ MonoBehaviour:
     m_Bits: 512
   grappleLine: {fileID: 888171135}
   isGrappling: 0
+  grappleFOV: 100
   instantCooldownCount: 0
   superDashCounterBar: {fileID: 361057390}
   superDashThreshold: 6
   superDashSpeed: 100
+  superdashFOV: 150
 --- !u!114 &121626421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5244,6 +5250,7 @@ MonoBehaviour:
   wallRunTiltAngle: 15
   tiltSpeed: 10
   currentTilt: 0
+  isWallRunning: 0
 --- !u!114 &136276715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5276,6 +5283,9 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2
   dashCooldownBar: {fileID: 0}
+  normalFOV: 90
+  dashFOV: 120
+  fovTransitionSpeed: 10
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
@@ -5283,10 +5293,12 @@ MonoBehaviour:
     m_Bits: 0
   grappleLine: {fileID: 0}
   isGrappling: 0
+  grappleFOV: 100
   instantCooldownCount: 0
   superDashCounterBar: {fileID: 0}
   superDashThreshold: 6
   superDashSpeed: 100
+  superdashFOV: 150
 --- !u!114 &136276716
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276774, g: 0.21589115, b: 0.2978246, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2343,6 +2343,7 @@ MonoBehaviour:
   wallRunTiltAngle: 15
   tiltSpeed: 10
   currentTilt: 0
+  isWallRunning: 0
 --- !u!114 &159309247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2375,6 +2376,9 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2
   dashCooldownBar: {fileID: 635252869}
+  normalFOV: 90
+  dashFOV: 120
+  fovTransitionSpeed: 10
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
@@ -2382,10 +2386,12 @@ MonoBehaviour:
     m_Bits: 512
   grappleLine: {fileID: 748223846}
   isGrappling: 0
+  grappleFOV: 100
   instantCooldownCount: 0
   superDashCounterBar: {fileID: 2010925541}
   superDashThreshold: 6
   superDashSpeed: 100
+  superdashFOV: 150
 --- !u!114 &159309248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9888,7 +9894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9170316909198469344, guid: c2b37abe35e81581d8e2016393257b1d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
