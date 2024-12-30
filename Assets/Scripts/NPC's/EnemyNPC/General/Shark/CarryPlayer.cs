@@ -1,7 +1,7 @@
 // Code used from CHATGPT
 using UnityEngine;
 
-public class NPCRotateAroundCenter : MonoBehaviour
+public class CarryPlayer : MonoBehaviour
 {
     public float radius = 5f; 
     public float speed = 1f; 
@@ -35,25 +35,6 @@ public class NPCRotateAroundCenter : MonoBehaviour
         {
             SmoothLookAtPlayerWithOffset(); 
         }
-        else
-        {
-            RotateAroundCenter();
-        }
-    }
-
-    // Function to allow the shark to rotate around a centre point
-    void RotateAroundCenter()
-    {
-        angle += speed * Time.deltaTime;
-        if (angle >= 360f)
-        {
-            angle -= 360f;
-        }
-        float x = center.x + Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
-        float z = center.z + Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
-        transform.position = new Vector3(x, transform.position.y, z);
-        Vector3 direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
-        transform.rotation = Quaternion.LookRotation(direction);
     }
 
 
