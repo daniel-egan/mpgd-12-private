@@ -29,7 +29,7 @@ public class OxygenTankPickup : MonoBehaviour
             Destroy(boxCollider);
 
             // Destroy the oxygen tank after pickup
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
