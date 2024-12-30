@@ -25,6 +25,42 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        // Begin playing music if not already playing
+        if (!audioSource.isPlaying)
+        {
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    void Update()
+    {
+        CheckForOverrideMusic();
+    }
+
+    private void CheckForOverrideMusic()
+    {
+        // Find the first OverrideMusic instance in the current scene
+        var overrideMusic = GameObject.FindObjectOfType<OverrideMusic>();
+        if (overrideMusic != null)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause(); // Pause the global music manager
+            }
+        }
+        else
+        {
+            // Resume playback if there is no override in the current scene
+            if (!audioSource.isPlaying)
+            {
+                audioSource.UnPause();
+            }
+        }
+    }
+
     public void SetMusicState(bool isMusicOn)
     {
         if (audioSource != null)
