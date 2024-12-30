@@ -6,9 +6,11 @@ public class OpenChest : MonoBehaviour
 {
     [SerializeField] private Animator npcAnimator;
 
+
+    // When the player collides with the chest the open animation starts, reveaing the key
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))  // if the player collides with the object
+        if (other.CompareTag("Player")) 
         {
             npcAnimator.SetTrigger("Open");
         }
