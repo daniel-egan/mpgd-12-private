@@ -7,11 +7,9 @@ public class KeyPickup : MonoBehaviour
     public Image KeyIcon;
     private void OnCollisionEnter(Collision collision)
     {
-
-        // If the player collides with the key the objectives change to indicate that they must escape
-        // key icon is displayed and the key is destroyed
-        if (collision.gameObject.CompareTag("Player")) 
+        if (collision.gameObject.CompareTag("Player"))  // if the player collides with the object
         {
+            Debug.Log("Coliiiiiiiiiiiidedd");
 
             collision.gameObject.GetComponent<Player>().hasKey = true; // makes the bool hasKey true so the door knows the player has the key
             GameObject l0ck = GameObject.Find("rust_key");  //lock -> l0ck [lock is a keyword in C#]
