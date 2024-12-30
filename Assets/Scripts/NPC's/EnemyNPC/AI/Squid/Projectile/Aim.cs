@@ -1,3 +1,4 @@
+// Code used from CHATGPT
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class EnemyAiming : MonoBehaviour
 
     public float attackRange = 10f;
 
+    // When the player is within a certain distance from them enemy the shoot function is called
     void Update()
     {
         if (player != null)
@@ -29,7 +31,8 @@ public class EnemyAiming : MonoBehaviour
             StartCoroutine(DisableSplashScreenAfterDelay(2f));
         }
     }
-
+    // The shoot function initializes and calls the Projectile prehab
+    // This prehab is shot toawards the player like 'ink'
     public void Shoot()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -43,6 +46,7 @@ public class EnemyAiming : MonoBehaviour
         Destroy(projectile, 2f);
     }
 
+    // Timer to remove the splash screen off the screen
     private IEnumerator DisableSplashScreenAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
