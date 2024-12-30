@@ -1,102 +1,87 @@
+// Code used from CHATGPT
 using UnityEngine;
 
 public class NPCRotateAroundCenter : MonoBehaviour
 {
-    public float radius = 5f; // Radius of rotation around the center
-    public float speed = 1f; // Speed of rotation
-    public float chaseSpeed = 5f; // Speed when chasing the player
-    public float chaseDistance = 10f; // Distance at which the NPC chases the player
-    public float turnSpeed = 5f; // Speed of smooth turning towards the player
-    private Vector3 center; // Center point of the rotation
-    public float angle = 0f; // Current angle of rotation
-    public bool lookingAtPlayer = false; // Flag to determine if NPC is looking at the player
-    public GameObject player; // Reference to the player GameObject
+    public float radius = 5f; 
+    public float speed = 1f; 
+    public float chaseSpeed = 5f;
+    public float chaseDistance = 10f; 
+    public float turnSpeed = 5f; 
+    private Vector3 center; 
+    public float angle = 0f; 
+    public bool lookingAtPlayer = false; 
+    public GameObject player;
 
+
+    // Initialize the centre point at which the sharks will start rotating around
     void Start()
     {
-        center = transform.position; // Initialize the center point
+        center = transform.position; 
     }
 
+
+    // The sharks will being to chase the player if within the chase distance
+    // If player triggers the box collider the shark will just merely look at the player
+    // Else the shark will just rotate around the prey
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
         if (distanceToPlayer <= chaseDistance)
         {
-            ChasePlayer(); // Chase the player if within chaseDistance
+            ChasePlayer(); 
         }
         else if (lookingAtPlayer)
         {
-            SmoothLookAtPlayerWithOffset(); // Smoothly look at the player with an offset
+            SmoothLookAtPlayerWithOffset(); 
         }
         else
         {
-            RotateAroundCenter(); // Rotate around the center
+            RotateAroundCenter();
         }
     }
 
+    // Function to allow the shark to rotate around a centre point
     void RotateAroundCenter()
     {
-        // Increment angle over time
         angle += speed * Time.deltaTime;
-
-        // Ensure angle stays within 0-360 degrees
         if (angle >= 360f)
         {
             angle -= 360f;
         }
-
-        // Calculate new position based on angle
         float x = center.x + Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
         float z = center.z + Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
         transform.position = new Vector3(x, transform.position.y, z);
-
-        // Calculate direction of movement and update rotation
         Vector3 direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
+
+    // When player is within a certain distance from the shark the shark will rotate to look at the player
     void SmoothLookAtPlayerWithOffset()
     {
-        // Calculate direction towards the player
         Vector3 directionToPlayer = player.transform.position - transform.position;
-        directionToPlayer.y = 0; // Ignore vertical difference
-
-        // Calculate target rotation towards the player
+        directionToPlayer.y = 0; 
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Apply the 90-degree offset
         Quaternion offsetRotation = Quaternion.Euler(0, 90, 0);
         Quaternion finalRotation = lookRotation * offsetRotation;
-
-        // Smoothly interpolate current rotation towards the target rotation with offset
         transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, turnSpeed * Time.deltaTime);
     }
 
+    // If the player is too close to the shark the shark will chase and collide with the player
     void ChasePlayer()
     {
-        // Move towards the player quickly
         Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
         transform.position += directionToPlayer * chaseSpeed * Time.deltaTime;
-
-        // Smoothly look at the player while chasing
         SmoothLookAtPlayerWithOffset();
     }
 
+    // Shark will look at player when box collider has been triggered
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player enters the trigger zone
         if (other.CompareTag("Player"))
         {
-            lookingAtPlayer = true; // Start looking at the player
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        // Check if the player enters the trigger zone
-        if (other.CompareTag("Player"))
-        {
-            lookingAtPlayer = false; // Start looking at the player
+            lookingAtPlayer = true;
         }
     }
 }
