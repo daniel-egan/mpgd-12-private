@@ -146,7 +146,6 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.z = 0;
             if (isSuperDashing)
             {
-                Debug.Log("SUPER DASH");
                 controller.Move(Camera.main.transform.forward * superDashSpeed * Time.deltaTime);
                 //instantCooldownCount = 0;
             }
@@ -164,14 +163,17 @@ public class PlayerMotor : MonoBehaviour
         //Handle upwards and downwards wallrunning
         if (isHoldingWallRunUp && isWallRunning)
         {
+            Debug.Log("WRUp");
             WallRunUp();
         }
         else if (isHoldingWallRunDown && isWallRunning)
         {
+            Debug.Log("WRUp");
             WallRunDown();
         }
         else if (isWallRunning)
         {
+            Debug.Log("WR");
             playerVelocity.y = 0;
         }
 
@@ -310,6 +312,7 @@ public class PlayerMotor : MonoBehaviour
         {
             if (Vector3.Dot(transform.forward, hitRight.normal) < -0.1f)
             {
+                Debug.Log("Wall on Right");
                 isTouchingWall = true;
                 wallNormal = hitRight.normal; // Get the normal of the wall on the right
             }
@@ -319,6 +322,7 @@ public class PlayerMotor : MonoBehaviour
         {
             if (Vector3.Dot(transform.forward, hitLeft.normal) < -0.1f)
             {
+                Debug.Log("Wall on Left");
                 isTouchingWall = true;
                 wallNormal = hitLeft.normal; // Get the normal of the wall on the left
             }
