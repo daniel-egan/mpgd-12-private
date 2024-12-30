@@ -37,7 +37,7 @@ public class FriendNPCSpeech3 : MonoBehaviour
     // This mimics a cutscene like effect where the player is soley focused on the diver speaking and what they need
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GameObject.Find("OxygenTank") != null)
         {
             if (hasSpoken == 0)
             {

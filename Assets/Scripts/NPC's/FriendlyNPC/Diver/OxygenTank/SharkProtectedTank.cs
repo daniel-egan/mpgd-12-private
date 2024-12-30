@@ -7,14 +7,19 @@ using TMPro;
 public class SharkProtectedTank : MonoBehaviour
 {
     public Text Objectives;
+    private int hasSpoken = 0;
     public Image OxygenTankIcon;
 
-    public GameObject TankCam;
     public GameObject FriendSharkCam;
     public GameObject NewOXTankCam;
     public GameObject Player;
 
+    public GameObject MainCamera;
+
     public TextMeshProUGUI FriendSharkSpeech;
+
+    public GameObject friendShark;
+    public GameObject chest;
 
     void Update()
     {
@@ -25,45 +30,60 @@ public class SharkProtectedTank : MonoBehaviour
     {
         if (other.CompareTag("Player") && GameObject.Find("OxygenTank") == null)
         {
-            StartCoroutine(HandleTankReturnSequence());
+            Objectives.text = "";
+            OxygenTankIcon.gameObject.SetActive(false);
+
+            if (CollectableManager.Instance != null)
+            {
+                CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
+            }
+            else
+            {
+                Debug.LogWarning("CollectableManager is not initialized.");
+            }
+            if (hasSpoken == 0)
+            {
+                StartCoroutine(HandleTankReturnSequence());
+            }
+  
         }
     }
 
     private IEnumerator HandleTankReturnSequence()
     {
-        Objectives.text = "";
-        OxygenTankIcon.gameObject.SetActive(false);
+        hasSpoken += 1;
 
-        if (CollectableManager.Instance != null)
-        {
-            CollectableManager.Instance.UnlockCollectable("oxygen_pickup");
-        }
-        else
-        {
-            Debug.LogWarning("CollectableManager is not initialized.");
-        }
-
-        Player.gameObject.SetActive(false);
-        TankCam.gameObject.SetActive(false);
+        MainCamera.gameObject.SetActive(false);
         FriendSharkCam.gameObject.SetActive(true);
+        friendShark.gameObject.SetActive(true);
+        chest.gameObject.SetActive(true);
+        FriendSharkSpeech.gameObject.SetActive(true);
+
+       
         FriendSharkSpeech.text = "Oh, you just wanted the oxygen tank";
         yield return new WaitForSeconds(2f);
 
-        Objectives.text = "I thought you wanted to steal some of our delicious lunch";
+        FriendSharkSpeech.text = "I thought you wanted to steal some of our delicious lunch";
         yield return new WaitForSeconds(2f);
 
-        Objectives.text = "How about you jump on my back, I'll help you get to that door";
+        FriendSharkSpeech.text = "How about you jump on my back, I'll help you get to that door";
         yield return new WaitForSeconds(2f);
 
-        Objectives.text = "Don't forget to collect the key!";
+        FriendSharkSpeech.text = "Don't forget to collect the key!";
         yield return new WaitForSeconds(2f);
 
-        NewOXTankCam.gameObject.SetActive(true);
+ 
+        FriendSharkSpeech.gameObject.SetActive(false);
         FriendSharkCam.gameObject.SetActive(false);
+        NewOXTankCam.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
 
-        Player.gameObject.SetActive(true);
+
+
+
+
+        MainCamera.gameObject.SetActive(true);
         NewOXTankCam.gameObject.SetActive(false);
-        TankCam.gameObject.SetActive(true);
+ 
     }
 }
