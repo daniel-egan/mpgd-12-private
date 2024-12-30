@@ -1,17 +1,21 @@
+// Code used from CHATGPT
 using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public GameObject npcPrefab; // NPC prefab to spawn
-    public Vector2 spawnAreaSize = new Vector2(10, 10); // Size of the spawn area
-    public int numberOfNPCs = 5; // Number of NPCs to spawn
-    public Transform spawnAreaCenter; // Center of the spawn area
+    public GameObject npcPrefab; 
+    public Vector2 spawnAreaSize = new Vector2(10, 10); 
+    public int numberOfNPCs = 5; 
+    public Transform spawnAreaCenter;
 
     void Start()
     {
         SpawnNPCs();
     }
 
+
+    // Spawns the npc prehabs at the start of the level
+    // valid spawn positions are first retrieved to ensure no npc is colliding with anything
     void SpawnNPCs()
     {
         for (int i = 0; i < numberOfNPCs; i++)
@@ -21,24 +25,20 @@ public class NPCSpawner : MonoBehaviour
         }
     }
 
+    // Function to return valid vector spawn position
     Vector3 GetValidSpawnPosition()
     {
         Vector3 randomPosition;
-
-        // Retry until a valid position is found
         randomPosition = GetRandomPosition();
-       
-
         return randomPosition;
     }
 
+
+    // Function to randomly generate coordinates from bounds for a random position for the prehab
     Vector3 GetRandomPosition()
     {
-        // Generate random X and Z within the spawn area bounds
         float randomX = Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2);
         float randomZ = Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2);
-
-        // Return the position relative to the spawn area center
         return new Vector3(randomX, 0, randomZ) + spawnAreaCenter.position;
     }
 }
