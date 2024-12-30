@@ -12,6 +12,10 @@ public class OxygenTankPickup : MonoBehaviour
     public TextMeshProUGUI Speech;
     public Image OxygenTankIcon;
 
+
+    // When the player is within the trigger zone of the oxygen tank the objectives are updated/
+    // and the oxygen tank is destroyed
+    // Also the oxygen tank icon in the inventory is displayed
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
