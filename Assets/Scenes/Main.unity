@@ -154,9 +154,10 @@ MonoBehaviour:
   dashClip: {fileID: 8300000, guid: 30582458a4012084396ba45e3e1cabeb, type: 3}
   superDashBuildupClip: {fileID: 8300000, guid: 86342dbab500b45ef9f2d6ee9e4a6f2c, type: 3}
   superDashLossClip: {fileID: 8300000, guid: 6052ec266f0a84d6a91f508325644d54, type: 3}
-  superDashUnlockClip: {fileID: 8300000, guid: d62df2408d00440abad070b71dbfc02b, type: 3}
+  superDashUnlockClip: {fileID: 8300000, guid: 2e6c4e5b2f9de42d08acff3599f7135d, type: 3}
   superDashClip: {fileID: 8300000, guid: 4a5cc1198c923ed46959baba311d21f2, type: 3}
-  wallRunningClip: {fileID: 8300000, guid: 6b10f8c2893a14735bb23a3173683098, type: 3}
+  wallRunningClip: {fileID: 8300000, guid: cb63454ece6244910b21a165896a9605, type: 3}
+  resetClip: {fileID: 8300000, guid: d62df2408d00440abad070b71dbfc02b, type: 3}
   soundEffectVolume: 1
 --- !u!4 &219840717
 Transform:

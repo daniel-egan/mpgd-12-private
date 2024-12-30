@@ -17,6 +17,7 @@ public class PlayerMotor : MonoBehaviour
 
     //variables for wallrunning
     public bool isWallRunning = false;
+    public bool WallRunningSoundOn = false;
     public float wallRunGravity = -2f;
     public float wallRunSpeed = 5f;
     public LayerMask wallLayer;
@@ -101,7 +102,7 @@ public class PlayerMotor : MonoBehaviour
             {
                 if (instantCooldownCount > 0)
                 {
-                    Debug.Log("RESET COOLDOWN COUNT");
+                    SoundManager.Instance.PlaySDLoss();
                     instantCooldownCount = 0;
                     superDashCounterBar.value = 0;
                 }
@@ -172,6 +173,24 @@ public class PlayerMotor : MonoBehaviour
         else if (isWallRunning)
         {
             playerVelocity.y = 0;
+        }
+
+        if (isWallRunning)
+        {
+            if (!WallRunningSoundOn)
+            {
+                SoundManager.Instance.wallRunningSource.loop = true;
+                SoundManager.Instance.wallRunningSource.Play();
+                WallRunningSoundOn = true;
+            }
+        }
+        else
+        {
+            if (WallRunningSoundOn)
+            {
+                SoundManager.Instance.wallRunningSource.Stop();
+                WallRunningSoundOn = false;
+            }
         }
 
         // Check if the player is jumping and collides with something above
@@ -267,6 +286,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Reset(Transform resetPosition, Transform checkPoint)
     {
+        SoundManager.Instance.PlayReset();
         controller.enabled = false;
         if (gameObject.GetComponent<Player>().hasKey == true)
         {
@@ -333,7 +353,6 @@ public class PlayerMotor : MonoBehaviour
             wallRunDirection = -wallRunDirection; // Invert direction if the wall is on the right
         }
 
-        //SoundManager.Instance.PlayWallrunning();
         // Apply the movement
         controller.Move(wallRunDirection * wallRunSpeed * Time.deltaTime);
     }
@@ -466,8 +485,13 @@ public class PlayerMotor : MonoBehaviour
 
             if (canSuperCount)
             {
+                SoundManager.Instance.PlaySDBuildup();
                 instantCooldownCount++;
                 lastCountTime = Time.time;
+                if (instantCooldownCount >= superDashThreshold)
+                {
+                    SoundManager.Instance.PlaySDUnlock();
+                }
             }
 
             //show super dash counter progress
@@ -561,8 +585,6 @@ public class PlayerMotor : MonoBehaviour
             instantCooldownCount++;
             lastCountTime = Time.time;
             superDashCounterBar.value = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
-
-            Debug.Log("Super Dash Counter Incremented!");
         }
 
         // Snap player to the ground after grappling

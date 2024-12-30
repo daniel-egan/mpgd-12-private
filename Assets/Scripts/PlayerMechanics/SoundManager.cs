@@ -11,7 +11,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource superDashLossSource;
     private AudioSource superDashUnlockSource;
     private AudioSource superDashSource;
-    private AudioSource wallRunningSource;
+    public AudioSource wallRunningSource;
+    private AudioSource resetSource;
 
     [Header("Sound Clips")]
     public AudioClip grappleClip;
@@ -22,6 +23,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip superDashUnlockClip;
     public AudioClip superDashClip;
     public AudioClip wallRunningClip;
+    public AudioClip resetClip;
 
     [Header("Volume Settings")]
     [Range(0f, 1f)] public float soundEffectVolume = 1f;
@@ -45,6 +47,7 @@ public class SoundManager : MonoBehaviour
         superDashUnlockSource = gameObject.AddComponent<AudioSource>();
         superDashSource = gameObject.AddComponent<AudioSource>();
         wallRunningSource = gameObject.AddComponent<AudioSource>();
+        resetSource = gameObject.AddComponent<AudioSource>();
 
         if (grappleClip) grappleSource.clip = grappleClip;
         if (jumpClip) jumpSource.clip = jumpClip;
@@ -54,6 +57,7 @@ public class SoundManager : MonoBehaviour
         if (superDashUnlockClip) superDashUnlockSource.clip = superDashUnlockClip;
         if (superDashClip) superDashSource.clip = superDashClip;
         if (wallRunningClip) wallRunningSource.clip = wallRunningClip;
+        if (resetClip) resetSource.clip = resetClip;
 
         grappleSource.playOnAwake = false;
         jumpSource.playOnAwake = false;
@@ -63,6 +67,7 @@ public class SoundManager : MonoBehaviour
         superDashUnlockSource.playOnAwake = false;
         superDashSource.playOnAwake = false;
         wallRunningSource.playOnAwake = false;
+        resetSource.playOnAwake = false;
     }
 
     public void PlayGrapple()
@@ -134,6 +139,20 @@ public class SoundManager : MonoBehaviour
         {
             wallRunningSource.volume = soundEffectVolume;
             wallRunningSource.PlayOneShot(wallRunningClip);
+            
+            if (wallRunningSource.isPlaying)
+            {
+                return;
+            }
+        }
+    }
+
+    public void PlayReset()
+    {
+        if (resetClip != null)
+        {
+            resetSource.volume = soundEffectVolume;
+            resetSource.PlayOneShot(resetClip);
         }
     }
 }
