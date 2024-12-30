@@ -6,13 +6,12 @@ public class FreezePlayer : MonoBehaviour
     public GameObject player;
     public GameObject eel;
     public float npcFreezeDuration = 5f;
-
     private CharacterController playerController;
     private BoxCollider boxCollider;
-
     public Canvas splashScreen;
-
     private bool isNpcFrozen = false;
+
+
 
     void Start()
     {
@@ -23,6 +22,7 @@ public class FreezePlayer : MonoBehaviour
         }
     }
 
+    // Calls the freeze function when the player enters the electric eels trigger zone
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -31,6 +31,10 @@ public class FreezePlayer : MonoBehaviour
         }
     }
 
+    // When the player is within the electric eels trigger zone the character controller for the player is turned off
+    // This results in them not being able to move
+    // The electric bolt sign also is displayed on the screen
+    // The electric eels ability to freeze the player is alos disabled
     void FreezePlayerMovement()
     {
         if (playerController != null)
@@ -45,6 +49,7 @@ public class FreezePlayer : MonoBehaviour
             }
         }
     }
+    // Timer for the duration of how long the player will be frozen for
     IEnumerator UnfreezePlayerCoroutine()
     {
         yield return new WaitForSeconds(npcFreezeDuration); 
@@ -52,6 +57,7 @@ public class FreezePlayer : MonoBehaviour
         UnfreezePlayer();
     }
 
+    // Returns movement ability back to the player
     public void UnfreezePlayer()
     {
         if (playerController != null)
@@ -60,7 +66,7 @@ public class FreezePlayer : MonoBehaviour
             StartCoroutine(EnableBoxCollider());
         }
     }
-
+    // returns freeze ability back to the npc
     IEnumerator EnableBoxCollider()
     {
         yield return new WaitForSeconds(npcFreezeDuration);
