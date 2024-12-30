@@ -18,6 +18,9 @@ public class FriendNPCSpeech2 : MonoBehaviour
     public GameObject NPCCamera;
     public GameObject Canvas;
 
+    public GameObject WallsCam;
+    public GameObject TankCamera;
+
 
 
     void Start()
@@ -61,9 +64,22 @@ public class FriendNPCSpeech2 : MonoBehaviour
         Speech.text = "Another one of my oxygen tanks have gone missing";
         yield return new WaitForSeconds(3f);
 
-        Speech.text = "That squid seems very suspicious over there";
+        NPCCamera.gameObject.SetActive(false);
+        TankCamera.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        NPCCamera.gameObject.SetActive(true);
+        TankCamera.gameObject.SetActive(false);
+        Speech.text = "That squid seems very suspicious over there next to those very weak walls";
         yield return new WaitForSeconds(3f);
 
+        WallsCam.gameObject.SetActive(true);
+        NPCCamera.gameObject.SetActive(false);
+        yield return new WaitForSeconds(3f);
+
+
+        WallsCam.gameObject.SetActive(false);
+        NPCCamera.gameObject.SetActive(true);
         Objectives.text = "Help find the diver's last oxygen tank";
         yield return new WaitForSeconds(3f);
 
