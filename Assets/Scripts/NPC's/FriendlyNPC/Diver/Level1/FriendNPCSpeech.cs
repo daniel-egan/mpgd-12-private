@@ -25,9 +25,7 @@ public class FriendNPCSpeech : MonoBehaviour
         Speech.text = "";
     }
 
-    // When player enters the divers collision zone it sets the player, canvas and main camera as false
-    // AND the npc camera to true
-    // This mimics a cutscene like effect where the player is soley focused on the diver speaking and what they need
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -45,8 +43,10 @@ public class FriendNPCSpeech : MonoBehaviour
         }
     }
 
-    // IEnumerator to change the diver's speech as they start talking
-    // The objectives chnage upon the end of them talking as well as all the necesary game objects set back to true
+    private void Update()
+    {
+    }
+
     private IEnumerator ChangeSpeech()
     {
         hasSpoken += 1;
