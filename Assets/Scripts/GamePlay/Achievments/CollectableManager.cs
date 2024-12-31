@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 // Represents each individual collectable that can be unlocked
@@ -116,7 +118,30 @@ public class CollectableManager : MonoBehaviour
             // Change the field of the collectable to be unlocked being true
             collectable.isUnlocked = true;
             SavePlayerPrefs();
+            
+            GameObject levelCanvas = GameObject.Find("Canvas");
+            
+            GameObject unlockTextGameObject = new GameObject("AchievementUnlockText");
+            unlockTextGameObject.transform.SetParent(levelCanvas.transform);
+            
+            
+            TextMeshProUGUI achievementTextMeshPro = unlockTextGameObject.AddComponent<TextMeshProUGUI>();
+            achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
+            
+            // Below positioning help by ChatGPT
+            RectTransform rectTransform = unlockTextGameObject.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(0, 0); 
+            rectTransform.sizeDelta = new Vector2(400, 100);
+            // Above positioning help by ChatGPT
 
+            StartCoroutine(UnlockTextCoroutine());
+
+            IEnumerator UnlockTextCoroutine()
+            {
+                yield return new WaitForSeconds(2);
+                Destroy(unlockTextGameObject);
+            }
+            
         }
 
 
