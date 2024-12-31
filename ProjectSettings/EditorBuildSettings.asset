@@ -38,5 +38,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Controls.unity
     guid: 5f2faab38f9188c46a13d26a5a433771
+  - enabled: 1
+    path: Assets/Scenes/TutorialWalk.unity
+    guid: c2bc009b86844491386ae560c31f6430
+  - enabled: 1
+    path: Assets/Scenes/TutorialDash.unity
+    guid: 282866c1b3dc9458085f099939b8c24f
+  - enabled: 1
+    path: Assets/Scenes/TutorialGrapple.unity
+    guid: 31493bcd04a15489aa1a7c84d6f545de
+  - enabled: 1
+    path: Assets/Scenes/TutorialSuperDash.unity
+    guid: fc9c9f0af43ca445bb18aa5c5bd314d5
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
