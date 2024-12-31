@@ -29,6 +29,12 @@
       "name": "Room to breath",
       "description": "Give the oxygen tank back to the NPC in level 1",
       "isUnlocked": false
+    },
+    {
+      "id": "tutorial_pearl",
+      "name": "A pearl a day",
+      "description": "Find the pearl in the tutorial level",
+      "isUnlocked": false
     }
   ]
 }
