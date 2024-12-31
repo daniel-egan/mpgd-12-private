@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276774, g: 0.21589115, b: 0.2978246, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,6 +195,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59893380}
   m_CullTransparentMesh: 1
+--- !u!1001 &89523883
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4176929186435853599, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_Name
+      value: TutorialDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -98.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766986751346547402, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dff59ca67b871ab4d90fb0ec49ac84fb, type: 3}
 --- !u!1 &172927912
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +575,7 @@ MonoBehaviour:
   completionText: {fileID: 714525356}
   hasKey: 0
   hasKeyText: {fileID: 1911861739}
+  tutorialDoorSceneName: TutorialCompletion
 --- !u!65 &236506683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5132,6 +5190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 200134047011778743, guid: 4f5284d759ab7c34d9b43a06b75ae11f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2182382734021949813, guid: 4f5284d759ab7c34d9b43a06b75ae11f, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -7733,3 +7795,4 @@ SceneRoots:
   - {fileID: 1544209362}
   - {fileID: 587971612}
   - {fileID: 1868733378}
+  - {fileID: 89523883}
