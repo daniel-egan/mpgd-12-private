@@ -4611,6 +4611,11 @@ MonoBehaviour:
   normalFOV: 90
   dashFOV: 120
   fovTransitionSpeed: 10
+  instantCooldownCount: 0
+  superDashCounterBar: {fileID: 0}
+  superDashThreshold: 6
+  superDashSpeed: 100
+  superdashFOV: 150
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
@@ -4619,11 +4624,7 @@ MonoBehaviour:
   grappleLine: {fileID: 0}
   isGrappling: 0
   grappleFOV: 100
-  instantCooldownCount: 0
-  superDashCounterBar: {fileID: 0}
-  superDashThreshold: 6
-  superDashSpeed: 100
-  superdashFOV: 150
+  grappleDashBan: 0
 --- !u!114 &136276716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49373,9 +49374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce5c54011378c478c00a90a6584246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushBackForce: 2
-  upwardForce: 1
-  pushBackDuration: 1
+  pushBackForce: 20
+  upwardForce: 3
+  pushBackDuration: 1.5
 --- !u!54 &1312709478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49518,6 +49519,11 @@ MonoBehaviour:
   normalFOV: 90
   dashFOV: 120
   fovTransitionSpeed: 10
+  instantCooldownCount: 0
+  superDashCounterBar: {fileID: 361057390}
+  superDashThreshold: 6
+  superDashSpeed: 100
+  superdashFOV: 150
   grappleSpeed: 20
   maxGrappleDistance: 20
   grappleLayer:
@@ -49526,11 +49532,7 @@ MonoBehaviour:
   grappleLine: {fileID: 888171135}
   isGrappling: 0
   grappleFOV: 100
-  instantCooldownCount: 0
-  superDashCounterBar: {fileID: 361057390}
-  superDashThreshold: 6
-  superDashSpeed: 100
-  superdashFOV: 150
+  grappleDashBan: 0
 --- !u!114 &1312709482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76099,7 +76101,7 @@ PrefabInstance:
     - target: {fileID: 3250287415006213754, guid: e3bb4712fb0b2dd4ca4d1d4f10411006, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312709473}
     - target: {fileID: 3250287415006213754, guid: e3bb4712fb0b2dd4ca4d1d4f10411006, type: 3}
       propertyPath: splashScreen
       value: 
