@@ -2,12 +2,13 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
-//this script handles our player moving around with the WASD keys
+//this script handles all player movement mechanics
 public class PlayerMotor : MonoBehaviour
 {
-    //values for speed, isGrounded, speed, gravity & jumpheight
+    //fundamental values (for speed, isGrounded, speed, gravity & jumpheight)
     private CharacterController controller;
     private Vector3 playerVelocity;
     public bool isGrounded;
@@ -26,7 +27,6 @@ public class PlayerMotor : MonoBehaviour
     public RaycastHit hitRight;
     public RaycastHit hitLeft;
     private Rigidbody rb;
-
     private bool isTouchingWall = false;
     public Vector3 wallNormal;
     public float wallRunJumpLateralForce = 8f;
@@ -34,10 +34,10 @@ public class PlayerMotor : MonoBehaviour
     public bool isHoldingWallRunDown = false;
 
     //variables for dashing
-    public float dashSpeed = 40f; // Speed of the dash
-    public float dashDuration = 0.2f; // How long the dash lasts
-    public float dashCooldown = 2f; // Cooldown time for the dash
-    private bool canDash = true; // Whether the player can dash
+    public float dashSpeed = 40f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 2f;
+    private bool canDash = true;
     private bool isDashing = false;
     private Coroutine dashCoroutine;
     public UnityEngine.UI.Slider dashCooldownBar;
@@ -50,51 +50,54 @@ public class PlayerMotor : MonoBehaviour
     private Camera playerCamera;
     private Coroutine activeFOVCoroutine;
 
-    // variables for grappling
-    public float grappleSpeed = 20f; // Speed of the grapple pull
-    public float maxGrappleDistance = 20f; // Maximum range of the grapple
-    public LayerMask grappleLayer; // Layers the grapple can attach to
-    public LineRenderer grappleLine; // Line renderer to visualize the grapple
-    public bool isGrappling = false; // Whether the player is currently grappling
-    private Vector3 grapplePoint; // Point the grapple is attached to
-    private bool dashedBeforeGrapple = false;
-    public float grappleFOV = 100f;
-
     //variables for super dash
-    public int instantCooldownCount = 0; // Counter for instant cooldowns
-    public UnityEngine.UI.Slider superDashCounterBar; // Slider to show progress toward super dash
-    public float superDashThreshold = 6; // Number of instant cooldowns needed for super dash
+    public int instantCooldownCount = 0;
+    public UnityEngine.UI.Slider superDashCounterBar;
+    public float superDashThreshold = 6;
     public float superDashSpeed = 100f;
     private bool canSuperCount = false;
     private bool isSuperDashing = false;
     private float lastCountTime = 0f;
     public float superdashFOV = 150f;
 
+    // variables for grappling
+    public float grappleSpeed = 20f;
+    public float maxGrappleDistance = 20f;
+    public LayerMask grappleLayer;
+    public LineRenderer grappleLine;
+    public bool isGrappling = false;
+    private Vector3 grapplePoint;
+    private bool dashedBeforeGrapple = false;
+    public float grappleFOV = 100f;
+    public bool grappleDashBan = false;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
 
         playerCamera = Camera.main;
+
+        //set up FOV manipulation for later
         if (playerCamera != null)
         {
             playerCamera.fieldOfView = normalFOV;
         }
 
+        //unlock rotation from Rigidbody (for wallrun tilt) but lock Y axis to prevent rolling camera
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = controller.isGrounded;
 
+        //Handle SD Loss and Grapple disable when grounded
         if (isGrounded)
         {
-            dashedBeforeGrapple = false; //Reset flag when grounded
-            isGrappling = false; //Stop grappling when grounded
+            dashedBeforeGrapple = false;
+            isGrappling = false;
             grappleLine.enabled = false;
             canSuperCount = false;
 
@@ -109,8 +112,10 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
+        //Always check for wall for wallrunning
         CheckForWall();
 
+        //Handle UI refresh for SD buildup/regular refresh
         if (forcedDashCooldownUI)
         {
             UpdateDashCooldownUI(true);
@@ -121,6 +126,7 @@ public class PlayerMotor : MonoBehaviour
             UpdateDashCooldownUI();
         }
 
+        //Enable cooldown period once dashed
         if (isCooldownFull)
         {
             if (isDashing)
@@ -129,7 +135,7 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
-        //if (isTouchingWall && !isGrounded && playerVelocity.y <= 0)
+        //Wallrun if touching wall and midair
         if (isTouchingWall && !isGrounded)
         {
             StartWallRun();
@@ -139,6 +145,7 @@ public class PlayerMotor : MonoBehaviour
             StopWallRun();
         }
 
+        //Handle dashing & super dashing
         if (isDashing || isSuperDashing)
         {
             lastDashTime = Time.time;
@@ -147,7 +154,6 @@ public class PlayerMotor : MonoBehaviour
             if (isSuperDashing)
             {
                 controller.Move(Camera.main.transform.forward * superDashSpeed * Time.deltaTime);
-                //instantCooldownCount = 0;
             }
             else
             {
@@ -155,28 +161,39 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
+        //Handle grappling
         if (isGrappling)
         {
             PerformGrapple();
         }
 
-        //Handle upwards and downwards wallrunning
+        if (isGrappling && canDash)
+        {
+            canDash = false;
+            grappleDashBan = true;
+        }
+        
+        if (!isGrappling && !canDash && grappleDashBan)
+        {
+            canDash = true;
+            grappleDashBan = false;
+        }
+
+        //Handle wallrunning (upwards and downwards too)
         if (isHoldingWallRunUp && isWallRunning)
         {
-            Debug.Log("WRUp");
             WallRunUp();
         }
         else if (isHoldingWallRunDown && isWallRunning)
         {
-            Debug.Log("WRUp");
             WallRunDown();
         }
         else if (isWallRunning)
         {
-            Debug.Log("WR");
             playerVelocity.y = 0;
         }
 
+        //Handle wallrunning sound
         if (isWallRunning)
         {
             if (!WallRunningSoundOn)
@@ -195,13 +212,11 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
-        // Check if the player is jumping and collides with something above
+        // Prevent "hovering" if player collides something whilst jumping
         if (!isGrounded && playerVelocity.y > 0)
         {
-            // Check for collisions above using the CharacterController's collision flags
             if ((controller.collisionFlags & CollisionFlags.Above) != 0)
             {
-                // Immediately stop upward velocity and start falling
                 playerVelocity.y = 0;
             }
         }
@@ -217,7 +232,7 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.z = input.y;
 
 
-        //calculate the force that needs to act on the player using the vector3 input, speed & time, given that they're not wallrunning
+        //calculate the force that needs to act on the player using the vector3 input, speed & time
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
         //apply a steady force of gravity on the player when they're not midair/jumping
@@ -234,13 +249,16 @@ public class PlayerMotor : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    //handle all "jumping" (Spacebar inputs)
     public void Jump()
     {
+        //regular jump
         if (isGrounded)
         {
             SoundManager.Instance.PlayJump();
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
+        //wallrunning jump
         else if (isWallRunning)
         {
             // Jump off the wall
@@ -248,17 +266,13 @@ public class PlayerMotor : MonoBehaviour
             Vector3 forwardForce = transform.forward * wallRunJumpForce;
             Vector3 lateralForce = wallNormal * wallRunJumpLateralForce;
 
-            /*Debug.Log($"{forwardForce}");
-            Debug.Log($"{lateralForce}");
-            Debug.Log($"{wallNormal}");*/
-
             SoundManager.Instance.PlayJump();
             Vector3 wallJumpForce = forwardForce + lateralForce + (Vector3.up * upwardForce);
             playerVelocity += wallJumpForce;
 
-            //playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             StopWallRun();
         }
+        //dash and superdash
         else if (canDash)
         {
             canSuperCount = true;
@@ -285,7 +299,7 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-
+    //handle resets
     public void Reset(Transform resetPosition, Transform checkPoint)
     {
         SoundManager.Instance.PlayReset();
@@ -305,16 +319,16 @@ public class PlayerMotor : MonoBehaviour
         controller.enabled = true;
     }
 
+    //check for wall on either side of player
     void CheckForWall()
     {
-        // Check if either wall is detected
+        // Use raycasting, then if wall detected, retrieve the normal of the wall (to wallrun in right direction)
         if (Physics.Raycast(transform.position, transform.right, out hitRight, wallCheckDistance, wallLayer))
         {
             if (Vector3.Dot(transform.forward, hitRight.normal) < -0.1f)
             {
-                Debug.Log("Wall on Right");
                 isTouchingWall = true;
-                wallNormal = hitRight.normal; // Get the normal of the wall on the right
+                wallNormal = hitRight.normal;
             }
 
         }
@@ -322,9 +336,8 @@ public class PlayerMotor : MonoBehaviour
         {
             if (Vector3.Dot(transform.forward, hitLeft.normal) < -0.1f)
             {
-                Debug.Log("Wall on Left");
                 isTouchingWall = true;
-                wallNormal = hitLeft.normal; // Get the normal of the wall on the left
+                wallNormal = hitLeft.normal;
             }
 
         }
@@ -334,7 +347,7 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-
+    //wallrun if wall is on either side of player
     void StartWallRun()
     {
         if (playerVelocity.y > 0 && !isHoldingWallRunUp && !isHoldingWallRunDown) return; // Ignore wall running if jumping
@@ -361,9 +374,9 @@ public class PlayerMotor : MonoBehaviour
         controller.Move(wallRunDirection * wallRunSpeed * Time.deltaTime);
     }
 
+    //handle wallrunning upwards
     public void WallRunUp()
     {
-        Debug.Log("Wallrun Up");
         if (isWallRunning && isHoldingWallRunUp)
         {
             playerVelocity.y = Mathf.Lerp(playerVelocity.y, wallRunSpeed, Time.deltaTime * 10f); // Smoothly increase upward speed
@@ -374,9 +387,9 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    //handle wallrunning downwards
     public void WallRunDown()
     {
-        Debug.Log("Wallrun Down");
         if (isWallRunning && isHoldingWallRunDown)
         {
             playerVelocity.y = Mathf.Lerp(playerVelocity.y, -wallRunSpeed, Time.deltaTime * 10f); // Smoothly decrease upward speed
@@ -387,6 +400,7 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    //stop wallrunning
     void StopWallRun()
     {
         isWallRunning = false;
@@ -404,21 +418,21 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    //handle dashing
     private IEnumerator PerformDash()
     {
         canDash = false;
         isDashing = true;
-        dashedBeforeGrapple = true; // Set the flag when dashing starts
+        dashedBeforeGrapple = true; // Enable for potential SD buildup
 
-        //lastDashTime = Time.time;
-
+        //manipulate FOV to give "speed" effect when dashing
         StartFOVTransition(dashFOV);
         yield return new WaitForSeconds(dashDuration);
         StartFOVTransition(normalFOV);
 
         isDashing = false;
 
-        // Wait for the cooldown if it hasn't been reset by grappling
+        // Wait for regular cooldown if it hasn't been reset by grappling
         if (!isGrappling)
         {
             yield return new WaitForSeconds(dashCooldown);
@@ -427,16 +441,21 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    //handle superdash
     private IEnumerator PerformSuperDash()
     {
+        //disable regular dashing as well to ensure it's reset from 0 (to prevent player double dashing)
         canDash = false;
         isSuperDashing = true;
         SoundManager.Instance.PlaySuperDash();
 
+        //reset SD buildup values to 0
         dashCooldownBar.value = 0f;
         superDashCounterBar.value = 0f;
         instantCooldownCount = 0;
 
+
+        //manipulate FOV to give "speed" effect when superdashing
         StartFOVTransition(superdashFOV);
         yield return new WaitForSeconds(dashDuration);
         StartFOVTransition(normalFOV);
@@ -451,6 +470,7 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    //Handle FOV changes
     private IEnumerator ChangeFOV(float targetFOV)
     {
         if (playerCamera == null) yield break;
@@ -464,6 +484,7 @@ public class PlayerMotor : MonoBehaviour
         playerCamera.fieldOfView = targetFOV; // Ensure the FOV reaches the exact value
     }
 
+    //Helper function to help with FOV changes
     private void StartFOVTransition(float targetFOV)
     {
         // Stop the current FOV coroutine if it's active
@@ -476,17 +497,19 @@ public class PlayerMotor : MonoBehaviour
         activeFOVCoroutine = StartCoroutine(ChangeFOV(targetFOV));
     }
 
-
+    //handle dash and superdash UI updates
     void UpdateDashCooldownUI(bool forceUpdate = false)
     {
         float counterProgress;
 
+        //forceUpdate indicates that SD buildup has occurred
         if (forceUpdate)
         {
             // Instantly set slider to 1 (fully cooled down) and increment superDashCounter
             dashCooldownBar.value = 1f;
             isCooldownFull = true;
 
+            //Incrementing SD buildup
             if (canSuperCount)
             {
                 SoundManager.Instance.PlaySDBuildup();
@@ -498,7 +521,7 @@ public class PlayerMotor : MonoBehaviour
                 }
             }
 
-            //show super dash counter progress
+            //show super dash counter progress once incremented
             counterProgress = Mathf.Clamp01((float)instantCooldownCount / superDashThreshold);
             superDashCounterBar.value = counterProgress;
 
@@ -520,6 +543,7 @@ public class PlayerMotor : MonoBehaviour
         superDashCounterBar.value = counterProgress;
     }
 
+    //start grappling
     public void StartGrapple()
     {
         if (isGrappling)
@@ -527,6 +551,7 @@ public class PlayerMotor : MonoBehaviour
             return;
         }
 
+        //visualise "grapple" wire with raycast ray
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, maxGrappleDistance, grappleLayer))
         {
@@ -555,19 +580,21 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-
-
+    //in the middle of grappling
     void PerformGrapple()
     {
+        //calculate direciton needed to go in for grapple
         Vector3 direction = grapplePoint - transform.position;
         float distance = direction.magnitude;
 
+        //stop grappling once at the target
         if (distance < 1f || isGrounded)
         {
             StopGrapple();
             return;
         }
 
+        //move player towards grapple target
         controller.Move(direction.normalized * grappleSpeed * Time.deltaTime);
 
         // Update the grapple visualization
@@ -575,6 +602,7 @@ public class PlayerMotor : MonoBehaviour
         grappleLine.SetPosition(1, grapplePoint);
     }
 
+    //at end of grapple
     void StopGrapple()
     {
         isGrappling = false;
