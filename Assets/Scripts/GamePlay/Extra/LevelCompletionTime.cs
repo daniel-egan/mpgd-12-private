@@ -10,10 +10,10 @@ public class LevelCompletionTime : MonoBehaviour
 {
     private readonly Dictionary<string, float> _achievementTimes = new Dictionary<string, float>
     {
-        {"Tutorial", 90f},
-        {"Level1", 300f},
+        {"Level1", 90f},
         {"Level2", 300f},
         {"Level3", 300f},
+        {"BonusLevel", 300f},
     };
 
     // Start is called before the first frame update
