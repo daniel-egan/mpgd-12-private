@@ -53,5 +53,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialWallrun.unity
     guid: 785e66d1148e04e9592e80a1b09815a2
+  - enabled: 1
+    path: Assets/Scenes/TutorialCompletion.unity
+    guid: 97b30e802c842854b9dcca84dbb6b9f7
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
