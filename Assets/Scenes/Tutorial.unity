@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2593,7 +2593,7 @@ PrefabInstance:
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdPref
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1297405938}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
       value: 40
@@ -6070,7 +6070,7 @@ PrefabInstance:
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdPref
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1297405938}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
       value: 40
@@ -12539,6 +12539,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3793669037955375331, guid: 538bd6df41bf14249aa0c1bd4907b479, type: 3}
   m_PrefabInstance: {fileID: 1297405936}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1297405938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3477130174630014228, guid: 538bd6df41bf14249aa0c1bd4907b479, type: 3}
+  m_PrefabInstance: {fileID: 1297405936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1297490969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12659,7 +12664,7 @@ PrefabInstance:
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdPref
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1297405938}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
       value: 40
