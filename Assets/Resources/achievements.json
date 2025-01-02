@@ -29,6 +29,54 @@
       "name": "Room to breath",
       "description": "Give the oxygen tank back to the NPC in level 2",
       "isUnlocked": false
+    },
+    {
+      "id": "tutorial_pearl",
+      "name": "First Catch",
+      "description": "Find the pearl in The Tutorial",
+      "isUnlocked": false
+    },
+    {
+      "id": "one_pearl",
+      "name": "Treasure Hunter",
+      "description": "Find the pearl in Level 1",
+      "isUnlocked": false
+    },
+    {
+      "id": "two_pearl_one",
+      "name": "Hidden Gem",
+      "description": "Find the first pearl in Level 2",
+      "isUnlocked": false
+    },
+    {
+      "id": "two_pearl_two",
+      "name": "Ocean's Bounty",
+      "description": "Find the second pearl in Level 2",
+      "isUnlocked": false
+    },
+    {
+      "id": "three_pearl_one",
+      "name": "Glint In The Water",
+      "description": "Find the first pearl in Level 3",
+      "isUnlocked": false
+    },
+    {
+      "id": "three_pearl_two",
+      "name": "Shimmer Chaser",
+      "description": "Find the second pearl in Level 3",
+      "isUnlocked": false
+    },
+    {
+      "id": "bonus_pearl",
+      "name": "Pearl Seeker",
+      "description": "Find the pearl in Bonus Level",
+      "isUnlocked": false
+    },
+    {
+      "id": "all_pearl",
+      "name": "Pearl Perfection",
+      "description": "Find all pearls in all levels",
+      "isUnlocked": false
     }
   ]
 }
