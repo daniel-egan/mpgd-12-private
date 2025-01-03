@@ -12,6 +12,9 @@ public class StartGame : MonoBehaviour
     public GameObject Canvas;
     public TextMeshProUGUI Speech;
 
+
+    // Calls the hear speech funnction
+    // the player is spawned in this trigger so will automatically run
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -19,6 +22,9 @@ public class StartGame : MonoBehaviour
             StartCoroutine(HearSpeech());
         }
     }
+
+    // The king crabs diologue
+    // Activates all necesarry objects
     private IEnumerator HearSpeech()
     {
         hasSpoken += 1;
