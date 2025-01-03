@@ -1915,7 +1915,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.6
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -7832,6 +7832,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 624054369}
     - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
+      propertyPath: grappleSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
+      propertyPath: superDashSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: dashCooldownBar
       value: 
       objectReference: {fileID: 1131795303}
@@ -7842,6 +7850,10 @@ PrefabInstance:
     - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: wallCheckDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
+      propertyPath: maxGrappleDistance
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1423694400257810262, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: superDashCounterBar
