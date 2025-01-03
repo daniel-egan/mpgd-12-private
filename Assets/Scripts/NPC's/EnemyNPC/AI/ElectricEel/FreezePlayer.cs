@@ -44,6 +44,7 @@ public class FreezePlayer : MonoBehaviour
                 playerController.enabled = false;
                 splashScreen.gameObject.SetActive(true);
                 boxCollider.isTrigger = false;
+                player.tag = "Not Player";
                 StartCoroutine(UnfreezePlayerCoroutine());
                 
             }
@@ -71,6 +72,7 @@ public class FreezePlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(npcFreezeDuration);
         boxCollider.isTrigger = true;
+        player.tag = "Player";
     }
 
 }
