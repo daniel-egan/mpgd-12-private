@@ -10,6 +10,7 @@ TagManager:
   - EnemySquid
   - Projectile
   - DestroyWall
+  - Not Player
   layers:
   - Default
   - TransparentFX
