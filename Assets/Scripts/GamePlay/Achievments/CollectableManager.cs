@@ -110,12 +110,6 @@ public class CollectableManager : MonoBehaviour
         }
         else
         {
-            if (collectable.isUnlocked)
-            {
-                print("ALREADY UNLOCKED");
-                return;
-            }
-
             // Change the field of the collectable to be unlocked being true
             collectable.isUnlocked = true;
             SavePlayerPrefs();
@@ -142,7 +136,16 @@ public class CollectableManager : MonoBehaviour
             textGameObject.transform.SetParent(panelGameObject.transform);
 
             TextMeshProUGUI achievementTextMeshPro = textGameObject.AddComponent<TextMeshProUGUI>();
-            achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
+
+            if (collectable.isUnlocked)
+            {
+                achievementTextMeshPro.text = $"Achievement already unlocked!";
+            }
+            else
+            {
+                achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
+            }
+
             achievementTextMeshPro.alignment = TextAlignmentOptions.Center;
             achievementTextMeshPro.fontSize = 36;
             achievementTextMeshPro.color = Color.white;
