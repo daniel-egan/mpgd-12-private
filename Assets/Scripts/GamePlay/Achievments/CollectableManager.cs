@@ -111,9 +111,6 @@ public class CollectableManager : MonoBehaviour
         else
         {
             // Change the field of the collectable to be unlocked being true
-            collectable.isUnlocked = true;
-            SavePlayerPrefs();
-
             GameObject levelCanvas = GameObject.Find("Canvas");
 
             // Create a panel for the background
@@ -144,6 +141,8 @@ public class CollectableManager : MonoBehaviour
             else
             {
                 achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
+                collectable.isUnlocked = true;
+                SavePlayerPrefs();
             }
 
             achievementTextMeshPro.alignment = TextAlignmentOptions.Center;
