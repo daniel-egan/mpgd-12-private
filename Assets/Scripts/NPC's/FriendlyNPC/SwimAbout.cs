@@ -43,7 +43,7 @@ public class SwimAbout : MonoBehaviour
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 // Smoothly interpolate to the target rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, targetRotation.eulerAngles.y + 90, 0), Time.deltaTime * 5f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, targetRotation.eulerAngles.y - 90, 0), Time.deltaTime * 5f);
             }
         }
 
