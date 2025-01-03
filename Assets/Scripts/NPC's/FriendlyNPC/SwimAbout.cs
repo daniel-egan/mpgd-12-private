@@ -1,5 +1,5 @@
 //// Followed the tutorial below for this code
-/// https://www.youtube.com/watch?v=-Iwsz4gdgyQ  
+/// https://www.youtube.com/watch?v=-Iwsz4gdgyQ  and CHATGPT
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +16,7 @@ public class SwimAbout : MonoBehaviour
     [SerializeField] float range;
 
 
-    // Inistialises the NavMeshAgent and Enemy Aiming class from Aim.cs
+    // Inistialises the NavMeshAgent
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -29,6 +29,9 @@ public class SwimAbout : MonoBehaviour
 
     // The animation is set to swim and move around the tank
     // A new destination for the NPC is set continosuly for the NPC to go to
+    // NPC models are shifted 90 degrees sp
+    // Rotate the model to face its movement direction with an added 90-degree Y-axis rotation
+    // Smoothly interpolate to the target rotation
     void goForPatrol()
     {
         if (!walkpointSet) SearchForDest();
@@ -36,13 +39,11 @@ public class SwimAbout : MonoBehaviour
         if (walkpointSet)
         {
             agent.SetDestination(destPoint);
-
-            // Rotate the model to face its movement direction with an added 90-degree Y-axis rotation
             Vector3 direction = (agent.velocity != Vector3.zero) ? agent.velocity.normalized : Vector3.zero;
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                // Smoothly interpolate to the target rotation
+                
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, targetRotation.eulerAngles.y - 90, 0), Time.deltaTime * 5f);
             }
         }
