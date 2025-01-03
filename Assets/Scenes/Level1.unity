@@ -4128,15 +4128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5570556795896113116, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: m_Size.x
-      value: 22.558638
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5570556795896113116, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: m_Size.y
-      value: 5.498777
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5570556795896113116, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: m_Size.z
-      value: 20.106934
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5570556795896113116, guid: 8912306502408804786314b1db6a17b8, type: 3}
       propertyPath: m_Enabled
