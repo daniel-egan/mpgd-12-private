@@ -13,10 +13,12 @@ public class PopulateLevelTimes : MonoBehaviour
     {
         string topTimesString = PlayerPrefs.GetString($"{levelName}_TIMES", "0,0,0");
 
+        // Sets the text to the string received from storage, or the default string of "0,0,0"
         GetComponent<TextMeshProUGUI>().text = topTimesString;
 
         TextMeshProUGUI topTime = GetComponent<TextMeshProUGUI>();
 
+        // Checks if the timer is enabled, if it's not then we don't show the times on the level select
         if (!GlobalSettingsManager.Instance.IsTimerOn)
         {
             this.enabled = false;
@@ -25,4 +27,4 @@ public class PopulateLevelTimes : MonoBehaviour
         }
 
     }
-    }
+}
