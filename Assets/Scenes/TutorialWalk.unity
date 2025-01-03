@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276774, g: 0.21589115, b: 0.2978246, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,8 +311,9 @@ GameObject:
   - component: {fileID: 174136534}
   - component: {fileID: 174136536}
   - component: {fileID: 174136535}
+  - component: {fileID: 174136537}
   m_Layer: 5
-  m_Name: VideoDisplay
+  m_Name: ImageDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,16 +328,16 @@ RectTransform:
   m_GameObject: {fileID: 174136533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 267064985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 247.99994, y: -142.49019}
-  m_SizeDelta: {x: 300, y: 300}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 2048, y: 1024}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &174136535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +373,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174136533}
   m_CullTransparentMesh: 1
+--- !u!114 &174136537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174136533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 3
+  m_AspectRatio: 1
 --- !u!1001 &230730092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4077,12 +4092,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 934341946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867bf6c186b63e41bac89dfdc8349f1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e01e15a828a4660b27a0ee2eddb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallRunningVideo: {fileID: 1868733376}
-  Video: {fileID: 174136533}
-  Speech: {fileID: 418716381}
+  HelpPanel: {fileID: 174136533}
+  HelpImage: {fileID: 174136535}
+  HelpTexture: {fileID: 2800000, guid: 84570a0728b544e0a8e28f187e21deaf, type: 3}
+  Speech: {fileID: 0}
 --- !u!1001 &942243772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4197,12 +4213,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 942243773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867bf6c186b63e41bac89dfdc8349f1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e01e15a828a4660b27a0ee2eddb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallRunningVideo: {fileID: 943068132}
-  Video: {fileID: 174136533}
-  Speech: {fileID: 418716381}
+  HelpPanel: {fileID: 174136533}
+  HelpImage: {fileID: 174136535}
+  HelpTexture: {fileID: 2800000, guid: ebf904c0859da4b6dbd378e3cd39efaa, type: 3}
+  Speech: {fileID: 0}
 --- !u!1 &943068132
 GameObject:
   m_ObjectHideFlags: 0
@@ -6239,12 +6256,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1231121110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867bf6c186b63e41bac89dfdc8349f1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e01e15a828a4660b27a0ee2eddb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallRunningVideo: {fileID: 2132943769}
-  Video: {fileID: 174136533}
-  Speech: {fileID: 418716381}
+  HelpPanel: {fileID: 174136533}
+  HelpImage: {fileID: 174136535}
+  HelpTexture: {fileID: 2800000, guid: 92355c2a23cb54939b5c565d5ddc2a25, type: 3}
+  Speech: {fileID: 0}
 --- !u!1 &1231976242
 GameObject:
   m_ObjectHideFlags: 0
@@ -7510,12 +7528,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501428917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867bf6c186b63e41bac89dfdc8349f1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e01e15a828a4660b27a0ee2eddb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallRunningVideo: {fileID: 1625192106}
-  Video: {fileID: 174136533}
-  Speech: {fileID: 418716381}
+  HelpPanel: {fileID: 174136533}
+  HelpImage: {fileID: 174136535}
+  HelpTexture: {fileID: 2800000, guid: 0b85c3c23bdf04b17a863f6459b0aac2, type: 3}
+  Speech: {fileID: 0}
 --- !u!1 &1531217269
 GameObject:
   m_ObjectHideFlags: 0
@@ -8021,12 +8040,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1570681808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0867bf6c186b63e41bac89dfdc8349f1, type: 3}
+  m_Script: {fileID: 11500000, guid: c0e01e15a828a4660b27a0ee2eddb5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallRunningVideo: {fileID: 1544209360}
-  Video: {fileID: 174136533}
-  Speech: {fileID: 418716381}
+  HelpPanel: {fileID: 174136533}
+  HelpImage: {fileID: 174136535}
+  HelpTexture: {fileID: 2800000, guid: 5f5830ce64ed04f62971125651c9bf9c, type: 3}
+  Speech: {fileID: 0}
 --- !u!1 &1570762094
 GameObject:
   m_ObjectHideFlags: 0
@@ -10217,11 +10237,11 @@ SceneRoots:
   - {fileID: 1424385344}
   - {fileID: 1429123118}
   - {fileID: 2135468982}
-  - {fileID: 1570681807}
-  - {fileID: 934341945}
-  - {fileID: 1501428916}
-  - {fileID: 942243772}
   - {fileID: 1231121109}
+  - {fileID: 942243772}
+  - {fileID: 1570681807}
+  - {fileID: 1501428916}
+  - {fileID: 934341945}
   - {fileID: 1315058895}
   - {fileID: 959770014}
   - {fileID: 321416106}
