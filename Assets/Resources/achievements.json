@@ -25,9 +25,15 @@
       "isUnlocked": false
     },
     {
-      "id": "oxygen_pickup",
-      "name": "Room to breath",
+      "id": "oxygen_pickup1",
+      "name": "Room to Breath",
       "description": "Give the oxygen tank back to the NPC in level 2",
+      "isUnlocked": false
+    },
+    {
+      "id": "oxygen_pickup2",
+      "name": "Inky Business",
+      "description": "Give the oxygen tank back to the NPC in level 3",
       "isUnlocked": false
     },
     {
@@ -76,6 +82,12 @@
       "id": "all_pearl",
       "name": "Pearl Perfection",
       "description": "Find all pearls in all levels",
+      "isUnlocked": false
+    },
+    {
+      "id": "all_tank",
+      "name": "Helping Hand",
+      "description": "Help the diver find all his tanks",
       "isUnlocked": false
     }
   ]
