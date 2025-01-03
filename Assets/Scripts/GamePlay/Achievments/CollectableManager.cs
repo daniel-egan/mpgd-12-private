@@ -147,6 +147,16 @@ public class CollectableManager : MonoBehaviour
 
     }
 
+    public bool AreAllTanksCollected()
+    {
+        var oxygenPickup1 = FindItemById("oxygen_pickup1");
+        var oxygenPickup2 = FindItemById("oxygen_pickup2");
+
+        // Ensure both pickups are unlocked
+        return oxygenPickup1?.isUnlocked == true && oxygenPickup2?.isUnlocked == true;
+    }
+
+
     private void SavePlayerPrefs()
     {
         // Create a new wrapper object which has all the collectables as a field
