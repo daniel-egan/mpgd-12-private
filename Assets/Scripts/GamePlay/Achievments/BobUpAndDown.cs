@@ -1,3 +1,5 @@
+//This Script was generated using ChatGPT
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

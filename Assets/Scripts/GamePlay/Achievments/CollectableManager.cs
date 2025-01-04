@@ -1,3 +1,5 @@
+//This tutorial was used to help in making this script: https://www.youtube.com/watch?v=1J7suYYf5bw (UnlockCollectable() method)
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -134,6 +136,7 @@ public class CollectableManager : MonoBehaviour
 
             TextMeshProUGUI achievementTextMeshPro = textGameObject.AddComponent<TextMeshProUGUI>();
 
+            // Set appropriate notification message based on whether the achievement is already unlocked or not
             if (collectable.isUnlocked)
             {
                 achievementTextMeshPro.text = $"Achievement already unlocked!";
