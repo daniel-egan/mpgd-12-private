@@ -2,10 +2,24 @@ using UnityEngine;
 
 public class EndingManager : MonoBehaviour
 {
+    // Singleton instance
+    public static EndingManager Instance { get; private set; }
+
     // Object to activate
     [SerializeField] private GameObject objectToActivate;
     // Object to deactivate
     [SerializeField] private GameObject objectToDeactivate;
+
+    private void Awake()
+    {
+        // Ensure singleton pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -19,7 +33,7 @@ public class EndingManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter (Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision detected.");
         // Toggle objects when any collision occurs
