@@ -73,12 +73,6 @@
       "isUnlocked": false
     },
     {
-      "id": "bonus_pearl",
-      "name": "Pearl Seeker",
-      "description": "Find the pearl in Bonus Level",
-      "isUnlocked": false
-    },
-    {
       "id": "all_pearl",
       "name": "Pearl Perfection",
       "description": "Find all pearls in all levels",
