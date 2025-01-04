@@ -5532,7 +5532,7 @@ MonoBehaviour:
   HelpPanel: {fileID: 1965899141}
   HelpImage: {fileID: 1965899144}
   HelpTexture: {fileID: 2800000, guid: 7c0877afe638b4c8c8e1517ae275d099, type: 3}
-  Speech: {fileID: 0}
+  Speech: {fileID: 1110285936}
 --- !u!4 &79304796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4240833797884143528, guid: 0a28ac2ef0db42f4b814ac87a891512e, type: 3}
@@ -78139,7 +78139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Here's how to do it
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -118760,7 +118760,7 @@ MonoBehaviour:
   HelpPanel: {fileID: 1965899141}
   HelpImage: {fileID: 1965899144}
   HelpTexture: {fileID: 2800000, guid: dbb40940f0fa34c5ba78337ab2897ef5, type: 3}
-  Speech: {fileID: 0}
+  Speech: {fileID: 1962584852}
 --- !u!4 &1659031911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4240833797884143528, guid: 0a28ac2ef0db42f4b814ac87a891512e, type: 3}
@@ -139453,7 +139453,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Here's some help
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
