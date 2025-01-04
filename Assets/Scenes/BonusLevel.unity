@@ -7218,7 +7218,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 43.48044, y: 1.3090675, z: 16.8}
-  m_LocalScale: {x: 10, y: 1, z: 5}
+  m_LocalScale: {x: 11, y: 1, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1981450667}
@@ -7252,7 +7252,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 851237cd04e34db449b24c69eb86b7ca, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 33d75967291b2974daffc58b6e294fb2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &1066910627
 MeshCollider:
@@ -7271,7 +7271,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -12102,6 +12102,7 @@ MonoBehaviour:
   completionText: {fileID: 1043516920}
   hasKey: 0
   hasKeyText: {fileID: 1461068032}
+  tutorialDoorSceneName: 
 --- !u!65 &1898803574
 BoxCollider:
   m_ObjectHideFlags: 0
