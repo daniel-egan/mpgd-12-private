@@ -143,6 +143,15 @@ public class CollectableManager : MonoBehaviour
                 achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
                 collectable.isUnlocked = true;
                 SavePlayerPrefs();
+
+                // Check for "all pearls" achievement
+                if (id.Contains("_pearl") && !id.StartsWith("all_pearl")) // Pearl-specific ID pattern
+                {
+                    if (AreAllPearlsCollected())
+                    {
+                        UnlockCollectable("all_pearl");
+                    }
+                }
             }
 
             achievementTextMeshPro.alignment = TextAlignmentOptions.Center;
@@ -202,6 +211,27 @@ public class CollectableManager : MonoBehaviour
 
         // Ensure both pickups are unlocked
         return oxygenPickup1?.isUnlocked == true && oxygenPickup2?.isUnlocked == true;
+    }
+
+    public bool AreAllPearlsCollected()
+    {
+        // List of all pearl achievement IDs
+        string[] pearlIDs = {
+        "tutorial_pearl", "one_pearl", "two_pearl_one", "two_pearl_two",
+        "three_pearl_one", "three_pearl_two"
+        };
+
+        // Check if all the pearl achievements are unlocked
+        foreach (string id in pearlIDs)
+        {
+            var collectable = FindItemById(id);
+            if (collectable == null || !collectable.isUnlocked)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
