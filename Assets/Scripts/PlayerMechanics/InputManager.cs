@@ -21,12 +21,15 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //recognise the player input and the action map for input
         playerInput = new PlayerInput();
         ActionMapMain = playerInput.actionMapMain;
 
+        //set up the components for looking and moving around
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
+        //perform different actions based on different inputs
         ActionMapMain.Jump.performed += ctx => motor.Jump();
         ActionMapMain.Reset.performed += ctx => motor.Reset(resetPoint, checkPoint);
 
@@ -45,6 +48,7 @@ public class InputManager : MonoBehaviour
         //tell playermotor to move using value from movement action
         motor.ProcessMove(ActionMapMain.Movement.ReadValue<Vector2>());
 
+        //handle wallrunning for the movement system
         if (motor.isWallRunning)
         {
             look.isWallRunning = true;

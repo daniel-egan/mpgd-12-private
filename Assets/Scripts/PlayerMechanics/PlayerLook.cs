@@ -1,4 +1,7 @@
-//This script was made using this tutorial: https://youtu.be/rJqP5EesxLk?si=CMstgPC0u9ets30Y
+//This script was made using the this tutorial: https://youtu.be/rJqP5EesxLk?si=CMstgPC0u9ets30Y (default looking around)
+//This script was made using the this tutorial: https://www.youtube.com/watch?v=wDmXmgvzueI (wallrunning)
+//This script was made using the this tutorial: https://www.youtube.com/watch?v=gNt9wBOrQO4 (wallrunning)
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ public class PlayerLook : MonoBehaviour
     public Camera cam;
     private float xRotation = 0f;
 
+    //sensitivity values for looking around (mouse only)
     public float xSensitivity = 90f;
     public float ySensitivity = 90f;
 
@@ -21,6 +25,7 @@ public class PlayerLook : MonoBehaviour
 
     public void ProcessLook(Vector2 input)
     {
+        //recognise the X input and Y input
         float mouseX = input.x;
         float mouseY = input.y;
 
@@ -30,7 +35,7 @@ public class PlayerLook : MonoBehaviour
 
         if (isWallRunning)
         {
-            // Add a tilt effect during wallrunning
+            //Add a tilt effect during wallrunning
             currentTilt = Mathf.Lerp(currentTilt, wallRunTiltAngle, Time.deltaTime * tiltSpeed);
         }
         else
@@ -38,10 +43,10 @@ public class PlayerLook : MonoBehaviour
             currentTilt = Mathf.Lerp(currentTilt, 0f, Time.deltaTime * tiltSpeed);
         }
 
-        // Combine xRotation for looking up/down with current tilt
+        //Combine xRotation for looking up/down with current tilt
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, currentTilt);
 
-        // Rotate player to look left and right
+        //Rotate player to look left and right
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
 }
