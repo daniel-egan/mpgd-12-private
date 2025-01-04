@@ -18,11 +18,22 @@ public class ReturnOxygenTank : MonoBehaviour
 
     private IEnumerator UnlockAfterDelay()
     {
-        // Wait for 2 seconds
+        // Wait for 4 seconds
         yield return new WaitForSeconds(4);
 
         // Unlock the "all_tank" collectable
         CollectableManager.Instance.UnlockCollectable("all_tank");
+
+        // Activate the EndingManager GameObject
+        if (EndingManager.Instance != null)
+        {
+            EndingManager.Instance.gameObject.SetActive(true);
+            Debug.Log("EndingManager activated.");
+        }
+        else
+        {
+            Debug.LogWarning("EndingManager instance not found.");
+        }
     }
 
     // When the player is in the trigger zone of the diver to return the oxygen tank the objectives are removed,

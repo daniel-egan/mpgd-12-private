@@ -97,6 +97,42 @@ public class Player : MonoBehaviour
                     hasKeyText.gameObject.SetActive(false);
                 }
             }
+
+        }
+        else if (collision.gameObject.name == "BadEndingDoor")
+        {
+            if (hasKey)
+            {
+                // Stops the timer
+                timer.TransitionStopwatch();
+
+                // Set the PlayerPrefs so that we can access this string later in the next scene
+                PlayerPrefs.SetFloat("LevelCompletionTime", timer.GetStopwatchTime());
+                PlayerPrefs.SetString("LevelCompletionName", SceneManager.GetActiveScene().name);
+                PlayerPrefs.Save();
+
+                // Shows the level completed text
+                completionText.gameObject.SetActive(true);
+                SceneManager.LoadScene("BadEnding");
+
+                // Unlock the cursor and make it visible
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                hasKeyText.gameObject.SetActive(true);
+                // This means that the player does not have the key
+                // So this will show the text for 2 seconds and will then
+                // remove it from the display
+                // Adapted from https://stackoverflow.com/questions/25671746/coroutines-unity
+                StartCoroutine(HasKeyTextDelay());
+                IEnumerator HasKeyTextDelay()
+                {
+                    yield return new WaitForSeconds(2);
+                    hasKeyText.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
