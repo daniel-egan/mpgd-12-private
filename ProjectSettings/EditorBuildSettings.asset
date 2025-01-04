@@ -9,8 +9,41 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/AboutFish.unity
+    guid: 2eb206b4822481640a1d08b330cf708f
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 138be6fb1e3a5854f9d1b435d6479c55
+  - enabled: 1
+    path: Assets/Scenes/AboutGoldFish.unity
+    guid: 4d5e8d2dfbc36b141a2a1b5490ddc105
+  - enabled: 1
+    path: Assets/Scenes/AboutGreen.unity
+    guid: 0222d5ba13f6ca0478e3d00056ac71e7
+  - enabled: 1
+    path: Assets/Scenes/AboutHerring.unity
+    guid: 2416b6b4203e96a439258c303743e719
+  - enabled: 1
+    path: Assets/Scenes/AboutKoi.unity
+    guid: 44ad88f270aa5304fb1f2842ebd63865
+  - enabled: 1
+    path: Assets/Scenes/AboutPink.unity
+    guid: f5e20a7f97444b04f95ce09cfc67a5b5
+  - enabled: 1
+    path: Assets/Scenes/AboutPufferFish.unity
+    guid: d15663de432e07e488597ecfd692f60f
+  - enabled: 1
+    path: Assets/Scenes/AboutShark.unity
+    guid: 43f664a44f680ef43b40971e1f932459
+  - enabled: 1
+    path: Assets/Scenes/AboutSquid.unity
+    guid: 65cf67f4f1e541f48bbc1c02a8edbdaf
+  - enabled: 1
+    path: Assets/Scenes/AboutElectricEel.unity
+    guid: d789ae453bec0c24a91ee9f08eee26d5
+  - enabled: 1
+    path: Assets/Scenes/AboutYellow.unity
+    guid: 50f31f03de81686419819baba2f53261
   - enabled: 1
     path: Assets/Scenes/Completion.unity
     guid: 77f4b2a7a3b01ec49b35782587754140
