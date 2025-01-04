@@ -793,7 +793,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4804f0c0ca02a0f458d598cc924741e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30ba818ca0a04714286f1327d6edc528, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1077,8 +1077,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Koi thrive in outdoor ponds with plenty of space, clean water, and a temperature
-    range of 59-77\xB0F (15-25\xB0C)."
+  m_text: Found in the southwestern Pacific Ocean, especially around New Zealand
+    and Australia, Pink Maomao inhabit deeper reef environments, usually between
+    30 to 200 meters.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1346,8 +1347,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Koi fish have impressive lifespans, often living 25-35 years, with some
-    individuals exceeding 50 years under optimal care.
+  m_text: Pink Maomao can live for around 10-15 years in their natural habitat, depending
+    on environmental conditions and predation pressures.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1481,8 +1482,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: They are often associated with legends, such as the tale of koi swimming
-    upstream to become a dragon, representing personal transformation and ambition.
+  m_text: Pink Maomao are protogynous hermaphrodites, meaning they start life as
+    females and can transition to males as they mature.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
