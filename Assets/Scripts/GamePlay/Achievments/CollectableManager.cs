@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Represents each individual collectable that can be unlocked
 [Serializable]
@@ -109,42 +110,89 @@ public class CollectableManager : MonoBehaviour
         }
         else
         {
+            // Change the field of the collectable to be unlocked being true
+            GameObject levelCanvas = GameObject.Find("Canvas");
+
+            // Create a panel for the background
+            GameObject panelGameObject = new GameObject("AchievementPanel");
+            panelGameObject.transform.SetParent(levelCanvas.transform);
+
+            RectTransform panelRectTransform = panelGameObject.AddComponent<RectTransform>();
+            panelRectTransform.anchorMin = new Vector2(0.5f, 1f); // Top center
+            panelRectTransform.anchorMax = new Vector2(0.5f, 1f); // Top center
+            panelRectTransform.pivot = new Vector2(0.5f, 1f);
+            panelRectTransform.anchoredPosition = new Vector2(0, 100); // Start off-screen
+            panelRectTransform.sizeDelta = new Vector2(500, 120); // Panel size
+
+            // Add an Image component to the panel for a background
+            Image panelImage = panelGameObject.AddComponent<Image>();
+            panelImage.color = new Color(204f / 255f, 213f / 255f, 227f / 255f, 1f);
+
+            // Create the text as a child of the panel
+            GameObject textGameObject = new GameObject("AchievementText");
+            textGameObject.transform.SetParent(panelGameObject.transform);
+
+            TextMeshProUGUI achievementTextMeshPro = textGameObject.AddComponent<TextMeshProUGUI>();
+
             if (collectable.isUnlocked)
             {
-                print("ALREADY UNLOCKED");
-                return;
+                achievementTextMeshPro.text = $"Achievement already unlocked!";
             }
-
-            // Change the field of the collectable to be unlocked being true
-            collectable.isUnlocked = true;
-            SavePlayerPrefs();
-            
-            GameObject levelCanvas = GameObject.Find("Canvas");
-            
-            GameObject unlockTextGameObject = new GameObject("AchievementUnlockText");
-            unlockTextGameObject.transform.SetParent(levelCanvas.transform);
-            
-            
-            TextMeshProUGUI achievementTextMeshPro = unlockTextGameObject.AddComponent<TextMeshProUGUI>();
-            achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
-            
-            // Below positioning help by ChatGPT
-            RectTransform rectTransform = unlockTextGameObject.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(0, 0); 
-            rectTransform.sizeDelta = new Vector2(400, 100);
-            // Above positioning help by ChatGPT
-
-            StartCoroutine(UnlockTextCoroutine());
-
-            IEnumerator UnlockTextCoroutine()
+            else
             {
-                yield return new WaitForSeconds(2);
-                Destroy(unlockTextGameObject);
+                achievementTextMeshPro.text = $"You unlocked achievement: {collectable.name}";
+                collectable.isUnlocked = true;
+                SavePlayerPrefs();
             }
-            
+
+            achievementTextMeshPro.alignment = TextAlignmentOptions.Center;
+            achievementTextMeshPro.fontSize = 36;
+            achievementTextMeshPro.color = Color.white;
+
+            // Configure text RectTransform
+            RectTransform textRectTransform = textGameObject.GetComponent<RectTransform>();
+            textRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            textRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            textRectTransform.pivot = new Vector2(0.5f, 0.5f);
+            textRectTransform.anchoredPosition = Vector2.zero; // Centered in the panel
+            textRectTransform.sizeDelta = new Vector2(480, 100); // Size within the panel
+
+            // Start the animation coroutine
+            StartCoroutine(SwipePanelCoroutine(panelRectTransform, panelGameObject));
         }
+    }
 
+    IEnumerator SwipePanelCoroutine(RectTransform panelRectTransform, GameObject panelGameObject)
+    {
+        float duration = 0.5f; // Swipe animation duration
+        float waitTime = 2f;  // Time the text stays visible
+        Vector2 startPos = panelRectTransform.anchoredPosition;        // Start off-screen
+        Vector2 midPos = new Vector2(0, -50);                          // Visible position
+        Vector2 endPos = startPos;                                     // Swipe back up
 
+        // Animate swipe down
+        yield return StartCoroutine(AnimatePosition(panelRectTransform, startPos, midPos, duration));
+
+        // Wait while visible
+        yield return new WaitForSeconds(waitTime);
+
+        // Animate swipe back up
+        yield return StartCoroutine(AnimatePosition(panelRectTransform, midPos, endPos, duration));
+
+        // Destroy the panel and text
+        Destroy(panelGameObject);
+    }
+
+    IEnumerator AnimatePosition(RectTransform rectTransform, Vector2 from, Vector2 to, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            rectTransform.anchoredPosition = Vector2.Lerp(from, to, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        rectTransform.anchoredPosition = to;
     }
 
     public bool AreAllTanksCollected()
