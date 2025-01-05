@@ -12,7 +12,7 @@ public class LevelCompletionTime : MonoBehaviour
     private readonly Dictionary<string, float> _achievementTimes = new Dictionary<string, float>
     {
         {"Level1", 90f},
-        {"Level2", 300f},
+        {"Level2", 180f},
         {"Level3", 300f},
         {"BonusLevel", 300f},
     };
