@@ -23,10 +23,10 @@ TagManager:
   - Post
   - Platforms
   - Walls
-  - 
+  - NavMeshSurfaceSQUID1
   - NavMeshVolume
   - NavMeshSurface
-  - 
+  - NavMeshSurfaceSQUID2
   - 
   - 
   - 
