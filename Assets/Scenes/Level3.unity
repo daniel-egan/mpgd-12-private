@@ -15410,7 +15410,7 @@ MonoBehaviour:
   npcAnimator: {fileID: 585280362}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 2048
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -30002,7 +30002,7 @@ MonoBehaviour:
   npcAnimator: {fileID: 1048048477}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 16384
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -52164,7 +52164,7 @@ MonoBehaviour:
   npcAnimator: {fileID: 1771759248}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 2048
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -52719,7 +52719,7 @@ GameObject:
   - component: {fileID: 1787726689}
   - component: {fileID: 1787726688}
   - component: {fileID: 1787726687}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: SquidPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52759,7 +52759,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 16384
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -60982,7 +60982,7 @@ GameObject:
   - component: {fileID: 2052243886}
   - component: {fileID: 2052243885}
   - component: {fileID: 2052243884}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: SquidPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61022,7 +61022,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 10240
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
