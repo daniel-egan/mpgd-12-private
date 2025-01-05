@@ -3,13 +3,13 @@
     {
       "id": "time_Level1",
       "name": "Rookie Racer",
-      "description": "Complete level one quicker than the developers at 300 seconds",
+      "description": "Complete level one quicker than the developers at 90 seconds",
       "isUnlocked": false
     },
     {
       "id": "time_Level2",
       "name": "Time Virtuoso",
-      "description": "Complete level two quicker than the developers at 300 seconds",
+      "description": "Complete level two quicker than the developers at 180 seconds",
       "isUnlocked": false
     },
     {
