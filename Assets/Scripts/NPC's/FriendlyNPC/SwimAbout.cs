@@ -13,7 +13,7 @@ public class SwimAbout : MonoBehaviour
 
     Vector3 destPoint;
     bool walkpointSet;
-    [SerializeField] float range;
+    [SerializeField] float range = 10;
 
 
     // Inistialises the NavMeshAgent
