@@ -19291,7 +19291,7 @@ PrefabInstance:
       objectReference: {fileID: 287030013}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: flockNum
@@ -28298,7 +28298,7 @@ PrefabInstance:
       objectReference: {fileID: 287030013}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: flockNum
@@ -47238,7 +47238,7 @@ PrefabInstance:
       objectReference: {fileID: 287030013}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: flockNum
@@ -48470,7 +48470,7 @@ PrefabInstance:
       objectReference: {fileID: 287030013}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: flockNum
@@ -54512,7 +54512,7 @@ PrefabInstance:
       objectReference: {fileID: 287030013}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: birdsNum
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2648308413964160913, guid: 8d1a19be39a499b46b2c07778f8b1c9d, type: 3}
       propertyPath: flockNum
