@@ -1,12 +1,6 @@
 {
   "collectables": [
     {
-      "id": "time_Tutorial",
-      "name": "Tutorial Speedster",
-      "description": "Complete the tutorial quicker than the developers at 90 seconds",
-      "isUnlocked": false
-    },
-    {
       "id": "time_Level1",
       "name": "Rookie Racer",
       "description": "Complete level one quicker than the developers at 300 seconds",
